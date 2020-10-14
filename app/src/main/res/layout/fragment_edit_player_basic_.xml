@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="com.example.managefield.viewModel.PlayerViewModel"></import>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_height="?attr/actionBarSize">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:textColor="@color/white"
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Edit information basic"
+                    android:gravity="center_vertical"
+                    android:textSize="20dp"
+                    android:layout_weight="1"/>
+                <ImageButton
+                    android:id="@+id/image_btn_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="15dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_baseline_replay_white_24"/>
+                <ImageButton
+                    android:id="@+id/image_btn_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="15dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_baseline_check_white_24"/>
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            >
+            <TextView
+                android:drawableStart="@drawable/ic_baseline_account_box_24_blue"
+                android:text=" Name Player"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <EditText
+                android:text="@{PlayerViewModel.getInstance().playerLiveData.name}"
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
+            <TextView
+                android:drawableStart="@drawable/ic_baseline_phone_24_green"
+                android:text=" Phone"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <EditText
+                android:text="@{PlayerViewModel.getInstance().playerLiveData.phone}"
+                android:id="@+id/txtPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
+            <TextView
+                android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
+                android:text="Email"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <EditText
+                android:text="@{PlayerViewModel.getInstance().playerLiveData.email}"
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
+            <TextView
+                android:drawableStart="@drawable/ic_join_24"
+                android:text="Address"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <EditText
+                android:text="@{PlayerViewModel.getInstance().playerLiveData.address}"
+                android:id="@+id/txtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>
