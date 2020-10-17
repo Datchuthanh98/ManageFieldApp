@@ -25,7 +25,7 @@ import com.example.managefield.R;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.databinding.FragmentEditMainPlayerBinding;
 import com.example.managefield.databinding.LoadingLayoutBinding;
-import com.example.managefield.viewModel.PlayerViewModel;
+import com.example.managefield.viewModel.FieldViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
@@ -33,14 +33,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class FragmentEditMainPlayer extends Fragment {
+public class FragmentEditMainField extends Fragment {
     private Dialog loadingDialog;
     private LoadingLayoutBinding loadingLayoutBinding;
     private FragmentEditMainPlayerBinding binding;
     public static final int RESULT_LOAD_IMG_AVATAR = 1012;
     public static final int RESULT_LOAD_IMG_COVER = 1013;
     private  String urlAvatar , urlCover;
-    private PlayerViewModel session = PlayerViewModel.getInstance();
+    private FieldViewModel session = FieldViewModel.getInstance();
 
     @Nullable
     @Override
@@ -91,27 +91,19 @@ public class FragmentEditMainPlayer extends Fragment {
         binding.btnEditBasic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomSheetDialogFragment dialog = new FragmentEditPlayerBasic();
+                BottomSheetDialogFragment dialog = new FragmentEditFieldBasic();
                 dialog.show(getParentFragmentManager(), null);
 
             }
         });
 
-        binding.btnEditPlayer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetDialogFragment dialog = new FragmentEditPlayerPlayer();
-                dialog.show(getParentFragmentManager(), null);
-
-            }
-        });
 
 
 
         binding.btnEditIntroduce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomSheetDialogFragment dialog = new FragmentEditPlayerIntroduce();
+                BottomSheetDialogFragment dialog = new FragmentEditFieldIntroduce();
                 dialog.show(getParentFragmentManager(), null);
             }
         });
@@ -131,14 +123,14 @@ public class FragmentEditMainPlayer extends Fragment {
 
     private void observeLiveData(final Context context) {
         //init Photo
-        PlayerViewModel.getInstance().getAvatarLiveData().observe(getViewLifecycleOwner(), new Observer<File>() {
+        FieldViewModel.getInstance().getAvatarLiveData().observe(getViewLifecycleOwner(), new Observer<File>() {
             @Override
             public void onChanged(File file) {
                 Picasso.get().load(file).into(binding.avatar);
             }
         });
 
-        PlayerViewModel.getInstance().getCoverLiveData().observe(getViewLifecycleOwner(), new Observer<File>() {
+        FieldViewModel.getInstance().getCoverLiveData().observe(getViewLifecycleOwner(), new Observer<File>() {
             @Override
             public void onChanged(File file) {
                 Picasso.get().load(file).into(binding.cover);

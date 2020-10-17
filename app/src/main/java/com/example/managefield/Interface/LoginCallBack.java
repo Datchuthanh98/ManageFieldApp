@@ -1,10 +1,11 @@
 package com.example.managefield.Interface;
 
 
-import com.example.managefield.model.Player;
+import com.example.managefield.model.Field;
+
 
 public interface LoginCallBack {
-    void onSuccess(Player player);
+    void onSuccess(Field field);
 
     void onFailure(String message);
 }

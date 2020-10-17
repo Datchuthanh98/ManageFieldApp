@@ -1,12 +1,18 @@
 package com.example.managefield.model;
 
+import java.util.Map;
+
 public class Field {
     private  String id ;
     private  String address;
     private  String name;
     private  String phone;
+    private  String email;
     private  String longitude;
     private  String latitude;
+    private  String urlAvatar;
+    private  String urlCover;
+    private  String introduce;
 
     public Field() {
     }
@@ -58,4 +64,49 @@ public class Field {
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
+
+    public String getUrlAvatar() {
+        return urlAvatar;
+    }
+
+    public void setUrlAvatar(String urlAvatar) {
+        this.urlAvatar = urlAvatar;
+    }
+
+    public String getUrlCover() {
+        return urlCover;
+    }
+
+    public void setUrlCover(String urlCover) {
+        this.urlCover = urlCover;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
+
+    public  void setInforBasic(Map<String, Object> inforBasic){
+        this.name = inforBasic.get("name").toString() ;
+        this.phone =  inforBasic.get("phone").toString() ;
+        this.email =  inforBasic.get("email").toString() ;
+        this.address =  inforBasic.get("address").toString() ;
+    }
+
+
+
+
+
+
 }

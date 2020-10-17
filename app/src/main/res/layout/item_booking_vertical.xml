@@ -6,8 +6,8 @@
     <data>
         <import type="android.view.View" />
         <variable
-            name="match"
-            type="com.example.managefield.model.Match" />
+            name="booking"
+            type="com.example.managefield.model.Booking" />
     </data>
 
 <androidx.cardview.widget.CardView
@@ -20,6 +20,7 @@
    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="150dp">
 
@@ -55,8 +56,8 @@
                 android:id="@+id/score1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="@{match.scoreHome}"
-                />
+
+                android:text="0" />
 
             <TextView
                 android:gravity="center"
@@ -76,7 +77,7 @@
                 android:id="@+id/score2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="@{match.scoreAway}" />
+                android:text="0" />
 
 
 
@@ -109,7 +110,7 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="11/12/2020" />
+                android:text="@{booking.date}" />
 
             <TextView
                 app:layout_constraintTop_toTopOf="parent"
@@ -127,10 +128,31 @@
                 android:id="@+id/status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{match.active ?  `done`  :`comming soon`}" />
+                android:text="Sắp diễn ra" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        <LinearLayout
+            android:gravity="right"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:background="@drawable/ic_baseline_check_green_24"
+                android:id="@+id/btnAccept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></ImageButton>
+            <ImageButton
+                android:background="@drawable/ic_baseline_close_24"
+                android:id="@+id/btnDecline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></ImageButton>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>
 </layout>

@@ -4,46 +4,27 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.managefield.Interface.LoginCallBack;
-import com.example.managefield.R;
-import com.example.managefield.data.datasource.PlayerDataSource;
+import com.example.managefield.data.datasource.FieldDataSource;
 import com.example.managefield.databinding.ActivityLoginBinding;
 import com.example.managefield.databinding.LoadingLayoutBinding;
-import com.example.managefield.main.ActivityMainField;
-import com.example.managefield.model.Player;
-import com.example.managefield.viewModel.PlayerViewModel;
+import com.example.managefield.main.ActivityMain;
+import com.example.managefield.model.Field;
+import com.example.managefield.viewModel.FieldViewModel;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
-
-
-import java.util.Arrays;
 
 public class ActivityLogin extends AppCompatActivity {
 
 
     private FirebaseAuth mAuth;
-    private PlayerDataSource playerDataSource = PlayerDataSource.getInstance();
+    private FieldDataSource fieldDataSource = FieldDataSource.getInstance();
     private ActivityLoginBinding binding;
     //google
     private static final int RC_SIGN_IN = 123;
@@ -82,12 +63,12 @@ public class ActivityLogin extends AppCompatActivity {
 
     private  void loginWithEmail(){
         loadingDialog.show();
-        playerDataSource.login(binding.txtEmail.getText().toString(), binding.txtPassword.getText().toString(), new LoginCallBack() {
+        fieldDataSource.login(binding.txtEmail.getText().toString(), binding.txtPassword.getText().toString(), new LoginCallBack() {
             @Override
-            public void onSuccess(Player player) {
-                PlayerViewModel.getInstance().onUserChange(player);
+            public void onSuccess(Field field) {
+                FieldViewModel.getInstance().onUserChange(field);
                 loadingDialog.dismiss();
-                Intent intent = new Intent(ActivityLogin.this,ActivityMainField.class);
+                Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
                 startActivity(intent);
             }
 

@@ -1,12 +1,13 @@
 package com.example.managefield.Interface;
 
 
-import com.example.managefield.model.Player;
+import com.example.managefield.model.Field;
+
 
 import java.util.List;
 
 public interface LoadListPlayerRequestCallBack {
-    void onSuccess(List<Player> listPlayers);
+    void onSuccess(List<Field> listPlayers);
 
     void onFailure(String message);
 }

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.example.managefield.viewModel.PlayerViewModel"></import>
+        <import type="com.example.managefield.viewModel.FieldViewModel"></import>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{PlayerViewModel.getInstance().playerLiveData.name}"
+                android:text="@{FieldViewModel.getInstance().playerLiveData.name}"
                 android:id="@+id/txtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{PlayerViewModel.getInstance().playerLiveData.phone}"
+                android:text="@{FieldViewModel.getInstance().playerLiveData.phone}"
                 android:id="@+id/txtPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{PlayerViewModel.getInstance().playerLiveData.email}"
+                android:text="@{FieldViewModel.getInstance().playerLiveData.email}"
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{PlayerViewModel.getInstance().playerLiveData.address}"
+                android:text="@{FieldViewModel.getInstance().playerLiveData.address}"
                 android:id="@+id/txtAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>

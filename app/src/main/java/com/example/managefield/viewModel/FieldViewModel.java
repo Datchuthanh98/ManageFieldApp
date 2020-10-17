@@ -16,27 +16,28 @@ import com.example.managefield.Interface.UpdateImageCallBack;
 import com.example.managefield.Interface.UpdateProfileCallBack;
 import com.example.managefield.Interface.UserChangeCallBack;
 import com.example.managefield.data.enumeration.Result;
-import com.example.managefield.data.repository.PlayerRepository;
-import com.example.managefield.model.Player;
+import com.example.managefield.data.repository.FieldRepository;
+import com.example.managefield.model.Field;
+
 
 import java.io.File;
 import java.util.Calendar;
 import java.util.Map;
 
-public class PlayerViewModel extends ViewModel implements UserChangeCallBack {
-    private static PlayerViewModel instance;
+public class FieldViewModel extends ViewModel implements UserChangeCallBack {
+    private static FieldViewModel instance;
     private Application application;
-    private PlayerRepository playerRepository = PlayerRepository.getInstance();
-    private MutableLiveData<Player> playerLiveData = new MutableLiveData<>();
+    private FieldRepository fieldRepository = FieldRepository.getInstance();
+    private MutableLiveData<Field> playerLiveData = new MutableLiveData<>();
     private MutableLiveData<File> playerAvatarLiveData= new MutableLiveData<>();
     private MutableLiveData<File> playerCoverLiveData = new MutableLiveData<>();
     private MutableLiveData<Result> resultLiveData = new MutableLiveData<>(null);
     private MutableLiveData<Result> resultPhotoLiveData = new MutableLiveData<>(null);
     private String resultMessage = null;
 
-    public static PlayerViewModel getInstance() {
+    public static FieldViewModel getInstance() {
         if (instance == null) {
-            instance = new PlayerViewModel();
+            instance = new FieldViewModel();
         }
         return instance;
     }
@@ -49,11 +50,11 @@ public class PlayerViewModel extends ViewModel implements UserChangeCallBack {
         this.application = application;
     }
 
-    public LiveData<Player> getPlayerLiveData() {
+    public LiveData<Field> getPlayerLiveData() {
         return playerLiveData;
     }
 
-    public void setPlayerLiveData(Player player){
+    public void setPlayerLiveData(Field player){
         playerLiveData.setValue(player);
     }
 
@@ -63,40 +64,40 @@ public class PlayerViewModel extends ViewModel implements UserChangeCallBack {
 
 
     @Override
-    public void onUserChange(Player player) {
-        playerLiveData.setValue(player);
-        if (player != null) {
-            if (!player.getUrlAvatar().isEmpty()) {
-                String[] files = player.getUrlAvatar().split("/");
+    public void onUserChange(Field field) {
+        playerLiveData.setValue(field);
+        if (field != null) {
+            if (!field.getUrlAvatar().isEmpty()) {
+                String[] files = field.getUrlAvatar().split("/");
                 String fileName = files[files.length-1];
                 File photo = new File(getApplicationContext().getCacheDir(), fileName);
                 // 24 hours
                 if (photo.exists() && photo.lastModified() < Calendar.getInstance().getTimeInMillis() - 86400000){
                     playerAvatarLiveData.setValue(photo);
                 } else {
-                    playerRepository.getUserPhoto(new GetUserPhotoCallBack() {
+                    fieldRepository.getUserPhoto(new GetUserPhotoCallBack() {
                         @Override
                         public void onGetUserPhotoCallBack(File photo) {
                             playerAvatarLiveData.setValue(photo);
                         }
-                    }, player.getUrlAvatar(), getApplicationContext());
+                    }, field.getUrlAvatar(), getApplicationContext());
                 }
             }
 
-            if (!player.getUrlCover().isEmpty()) {
-                String[] files = player.getUrlCover().split("/");
+            if (!field.getUrlCover().isEmpty()) {
+                String[] files = field.getUrlCover().split("/");
                 String fileName = files[files.length-1];
                 File photo = new File(getApplicationContext().getCacheDir(), fileName);
                 // 24 hours
                 if (photo.exists() && photo.lastModified() < Calendar.getInstance().getTimeInMillis() - 86400000){
                     playerCoverLiveData.setValue(photo);
                 } else {
-                    playerRepository.getCoverPhoto(new GetUserCoverCallBack() {
+                    fieldRepository.getCoverPhoto(new GetUserCoverCallBack() {
                         @Override
                         public void onGetUserCoverCallBack(File photo) {
                             playerCoverLiveData.setValue(photo);
                         }
-                    }, player.getUrlCover(), getApplicationContext());
+                    }, field.getUrlCover(), getApplicationContext());
                 }
             }
 
@@ -118,7 +119,7 @@ public class PlayerViewModel extends ViewModel implements UserChangeCallBack {
     }
 
     public void updateProfile(Map<String, Object> updateBasic) {
-        playerRepository.updateProfile(updateBasic, new UpdateProfileCallBack() {
+        fieldRepository.updateProfile(updateBasic, new UpdateProfileCallBack() {
             @Override
             public void onSuccess() {
                 resultLiveData.setValue(Result.SUCCESS);
@@ -133,19 +134,18 @@ public class PlayerViewModel extends ViewModel implements UserChangeCallBack {
     }
 
     public  void updateImage(Uri uri, final String path , final boolean isAvatar){
-
-        playerRepository.updateImage(uri, path, isAvatar, new UpdateImageCallBack() {
+        fieldRepository.updateImage(uri, path, isAvatar, new UpdateImageCallBack() {
             @Override
             public void onSuccess(String url) {
                 Log.d("check updateUI", "onSuccess: VAO DAY R NE");
                 resultPhotoLiveData.setValue(Result.SUCCESS);
-                Player player = getInstance().playerLiveData.getValue();
+                Field field = getInstance().playerLiveData.getValue();
                 if (isAvatar){
-                    player.setUrlAvatar(url);
+                    field.setUrlAvatar(url);
                 } else {
-                    player.setUrlCover(url);
+                    field.setUrlCover(url);
                 }
-                getInstance().onUserChange(player);
+                getInstance().onUserChange(field);
             }
 
             @Override

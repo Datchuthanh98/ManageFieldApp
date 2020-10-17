@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.example.managefield.viewModel.PlayerViewModel"></import>
+        <import type="com.example.managefield.viewModel.FieldViewModel"></import>
     </data>
 
 
@@ -155,7 +155,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_baseline_account_box_24_blue"
-                        android:text="@{PlayerViewModel.getInstance().playerLiveData.name}"
+                        android:text="@{FieldViewModel.getInstance().playerLiveData.name}"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
@@ -163,7 +163,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
-                        android:text="@{PlayerViewModel.getInstance().playerLiveData.email}"
+                        android:text="@{FieldViewModel.getInstance().playerLiveData.email}"
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
@@ -171,87 +171,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_baseline_phone_24_green"
-                        android:text="@{PlayerViewModel.getInstance().playerLiveData.phone}"
+                        android:text="@{FieldViewModel.getInstance().playerLiveData.phone}"
                         android:textSize="16dp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Information player"
-                        android:textColor="@color/colorTittle"
-                        android:textSize="20dp"
-                        android:textStyle="bold"></TextView>
 
-                    <ImageButton
-                        android:id="@+id/btnEditPlayer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_baseline_edit_30_black"
-                        android:textStyle="bold"></ImageButton>
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_baseline_account_box_24_blue"
-                        android:text="@{PlayerViewModel.getInstance().playerLiveData.birthday}"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
-                        android:text="@{Integer.toString(PlayerViewModel.getInstance().playerLiveData.height) }"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
-                        android:text="@{Integer.toString(PlayerViewModel.getInstance().playerLiveData.weight)}"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_baseline_account_box_24_blue"
-                        android:text="@{PlayerViewModel.getInstance().playerLiveData.level}"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
-                        android:text="@{PlayerViewModel.getInstance().playerLiveData.position}"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_baseline_phone_24_green"
-                        android:text="@{PlayerViewModel.getInstance().playerLiveData.foot}"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -280,7 +207,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{PlayerViewModel.getInstance().playerLiveData.birthday}"
+                    android:text="@{FieldViewModel.getInstance().playerLiveData.introduce}"
                     android:textStyle="bold" />
             </LinearLayout>
         </ScrollView>

@@ -15,8 +15,7 @@
     </style>
 
     <style name="MyEditTextStyle" parent="Widget.AppCompat.EditText">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textColorHint">@android:color/white</item>
+
 <!--        <item name="android:background">@drawable/config_edittext</item>-->
     </style>
 

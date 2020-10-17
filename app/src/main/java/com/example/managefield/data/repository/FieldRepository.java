@@ -13,7 +13,7 @@ import com.example.managefield.Interface.LoadListPlayerRequestCallBack;
 import com.example.managefield.Interface.UpdateImageCallBack;
 import com.example.managefield.Interface.UpdateProfileCallBack;
 
-import com.example.managefield.data.datasource.PlayerDataSource;
+import com.example.managefield.data.datasource.FieldDataSource;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -21,16 +21,16 @@ import com.google.firebase.storage.FileDownloadTask;
 import java.io.File;
 import java.util.Map;
 
-public class PlayerRepository {
-    private static PlayerRepository instance;
-    private PlayerDataSource userDataSource = PlayerDataSource.getInstance();
+public class FieldRepository {
+    private static FieldRepository instance;
+    private FieldDataSource userDataSource = FieldDataSource.getInstance();
 
-    private PlayerRepository() {
+    private FieldRepository() {
     }
 
-    public static PlayerRepository getInstance() {
+    public static FieldRepository getInstance() {
         if (instance == null) {
-            instance = new PlayerRepository();
+            instance = new FieldRepository();
         }
         return instance;
     }
@@ -89,17 +89,17 @@ public class PlayerRepository {
         });
     }
 
-    public void getListPlayer(String id, LoadListPlayerCallBack loadListPlayerCallBack){
-        userDataSource.loadListPlayer(id,loadListPlayerCallBack);
-    }
-
-    public void getListPlayerRequest(String id, LoadListPlayerRequestCallBack loadListPlayerCallBack){
-        userDataSource.loadListPlayerRequest(id,loadListPlayerCallBack);
-    }
-
-    public void getListOtherPlayer(String id ,LoadListOtherPlayerCallBack loadListOtherPlayerCallBack){
-        userDataSource.loadListOtherPlayer(id,loadListOtherPlayerCallBack);
-    }
+//    public void getListPlayer(String id, LoadListPlayerCallBack loadListPlayerCallBack){
+//        userDataSource.loadListPlayer(id,loadListPlayerCallBack);
+//    }
+//
+//    public void getListPlayerRequest(String id, LoadListPlayerRequestCallBack loadListPlayerCallBack){
+//        userDataSource.loadListPlayerRequest(id,loadListPlayerCallBack);
+//    }
+//
+//    public void getListOtherPlayer(String id ,LoadListOtherPlayerCallBack loadListOtherPlayerCallBack){
+//        userDataSource.loadListOtherPlayer(id,loadListOtherPlayerCallBack);
+//    }
 
 
 

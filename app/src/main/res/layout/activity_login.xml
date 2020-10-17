@@ -47,7 +47,7 @@
       android:textColor="#0c0d0c"
       android:textColorHint="#0c0d0c"
       android:textColorHighlight="#FFFFFF"
-      android:text="test@gmail.com"
+      android:text="field1@gmail.com"
       />
 
   <EditText

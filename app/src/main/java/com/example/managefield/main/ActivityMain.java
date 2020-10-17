@@ -11,7 +11,7 @@ import com.example.managefield.R;
 import com.example.managefield.view.Adapter.AdapterFragmentField;
 import com.google.android.material.tabs.TabLayout;
 
-public class ActivityMainField extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main_field);

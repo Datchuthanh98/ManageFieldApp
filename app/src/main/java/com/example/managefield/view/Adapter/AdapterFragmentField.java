@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.managefield.view.Fragment.FragmentListBooking;
 import com.example.managefield.view.Fragment.FragmentListMatch;
-import com.example.managefield.view.Fragment.FragmentProfileMyself;
+import com.example.managefield.view.Fragment.FragmentProfileMyField;
 
 public class AdapterFragmentField extends FragmentPagerAdapter {
     int numTab = 3;
@@ -21,7 +21,7 @@ public class AdapterFragmentField extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new FragmentProfileMyself();
+                return new FragmentProfileMyField();
             case 1:
                 return new FragmentListMatch();
             case 2:
