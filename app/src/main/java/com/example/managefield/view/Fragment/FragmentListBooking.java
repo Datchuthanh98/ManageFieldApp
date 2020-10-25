@@ -43,19 +43,11 @@ public class FragmentListBooking extends Fragment {
         observerLiveDate();
     }
 
-
-
     private void observerLiveDate() {
-        viewModel.getResultLiveData().observe(getViewLifecycleOwner(), new Observer<Result>() {
+        SessionStateData.getInstance().getDatalistBooking().observe(getViewLifecycleOwner(), new Observer<DataState>() {
             @Override
-            public void onChanged(Result result) {
-                if (result == null) return;
-                if (result == Result.SUCCESS) {
-                    viewModel.getListBooking();
-                    SessionStateData.getInstance().setDatalistMatch(DataState.NEW);
-                } else if (result == Result.FAILURE) {
-
-                }
+            public void onChanged(DataState dataState) {
+                viewModel.getListBooking();
             }
         });
     }

@@ -7,7 +7,7 @@ import android.os.Build;
 
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.managefield.viewModel.FieldViewModel;
+import com.example.managefield.viewModel.SessionField;
 import com.google.firebase.FirebaseApp;
 
 public class MyApplication extends Application {
@@ -17,7 +17,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         //init Firebase for app
-        FieldViewModel.getInstance().setApplication(this);
+        SessionField.getInstance().setApplication(this);
         FirebaseApp.initializeApp(this);
         createNotificationChannel();
     }

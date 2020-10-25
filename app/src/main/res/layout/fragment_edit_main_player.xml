@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.example.managefield.viewModel.FieldViewModel"></import>
+        <import type="com.example.managefield.viewModel.SessionField"></import>
     </data>
 
 
@@ -155,7 +155,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_baseline_account_box_24_blue"
-                        android:text="@{FieldViewModel.getInstance().playerLiveData.name}"
+                        android:text="@{SessionField.getInstance().playerLiveData.name}"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
@@ -163,7 +163,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
-                        android:text="@{FieldViewModel.getInstance().playerLiveData.email}"
+                        android:text="@{SessionField.getInstance().playerLiveData.email}"
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
@@ -171,7 +171,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_baseline_phone_24_green"
-                        android:text="@{FieldViewModel.getInstance().playerLiveData.phone}"
+                        android:text="@{SessionField.getInstance().playerLiveData.phone}"
                         android:textSize="16dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -207,7 +207,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{FieldViewModel.getInstance().playerLiveData.introduce}"
+                    android:text="@{SessionField.getInstance().playerLiveData.introduce}"
                     android:textStyle="bold" />
             </LinearLayout>
         </ScrollView>

@@ -7,14 +7,9 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-
-import com.example.managefield.Interface.GetUserCoverCallBack;
-import com.example.managefield.Interface.GetUserPhotoCallBack;
-import com.example.managefield.Interface.UpdateImageCallBack;
-import com.example.managefield.Interface.UpdateProfileCallBack;
-import com.example.managefield.Interface.UserChangeCallBack;
+import com.example.managefield.Interface.CallBack;
+import com.example.managefield.Interface.FieldChangeCallBack;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.data.repository.FieldRepository;
 import com.example.managefield.model.Field;
@@ -24,20 +19,20 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.Map;
 
-public class FieldViewModel extends ViewModel implements UserChangeCallBack {
-    private static FieldViewModel instance;
+public class SessionField implements FieldChangeCallBack {
+    private static SessionField instance;
     private Application application;
     private FieldRepository fieldRepository = FieldRepository.getInstance();
-    private MutableLiveData<Field> playerLiveData = new MutableLiveData<>();
-    private MutableLiveData<File> playerAvatarLiveData= new MutableLiveData<>();
-    private MutableLiveData<File> playerCoverLiveData = new MutableLiveData<>();
+    private MutableLiveData<Field> filedLiveData = new MutableLiveData<>();
+    private MutableLiveData<File> fieldAvatarLiveData= new MutableLiveData<>();
+    private MutableLiveData<File> fieldCoverLiveData = new MutableLiveData<>();
     private MutableLiveData<Result> resultLiveData = new MutableLiveData<>(null);
     private MutableLiveData<Result> resultPhotoLiveData = new MutableLiveData<>(null);
     private String resultMessage = null;
 
-    public static FieldViewModel getInstance() {
+    public static SessionField getInstance() {
         if (instance == null) {
-            instance = new FieldViewModel();
+            instance = new SessionField();
         }
         return instance;
     }
@@ -51,21 +46,21 @@ public class FieldViewModel extends ViewModel implements UserChangeCallBack {
     }
 
     public LiveData<Field> getPlayerLiveData() {
-        return playerLiveData;
+        return filedLiveData;
     }
 
     public void setPlayerLiveData(Field player){
-        playerLiveData.setValue(player);
+        filedLiveData.setValue(player);
     }
 
-    public LiveData<File>  getAvatarLiveData() {return  playerAvatarLiveData ;};
+    public LiveData<File>  getAvatarLiveData() {return  fieldAvatarLiveData ;};
 
-    public LiveData<File>  getCoverLiveData() {return  playerCoverLiveData ;};
+    public LiveData<File>  getCoverLiveData() {return  fieldCoverLiveData ;};
 
 
     @Override
     public void onUserChange(Field field) {
-        playerLiveData.setValue(field);
+        filedLiveData.setValue(field);
         if (field != null) {
             if (!field.getUrlAvatar().isEmpty()) {
                 String[] files = field.getUrlAvatar().split("/");
@@ -73,12 +68,17 @@ public class FieldViewModel extends ViewModel implements UserChangeCallBack {
                 File photo = new File(getApplicationContext().getCacheDir(), fileName);
                 // 24 hours
                 if (photo.exists() && photo.lastModified() < Calendar.getInstance().getTimeInMillis() - 86400000){
-                    playerAvatarLiveData.setValue(photo);
+                    fieldAvatarLiveData.setValue(photo);
                 } else {
-                    fieldRepository.getUserPhoto(new GetUserPhotoCallBack() {
+                    fieldRepository.getUserPhoto(new CallBack<File, String>() {
                         @Override
-                        public void onGetUserPhotoCallBack(File photo) {
-                            playerAvatarLiveData.setValue(photo);
+                        public void onSuccess(File file) {
+                            fieldAvatarLiveData.setValue(file);
+                        }
+
+                        @Override
+                        public void onFailure(String s) {
+
                         }
                     }, field.getUrlAvatar(), getApplicationContext());
                 }
@@ -90,13 +90,19 @@ public class FieldViewModel extends ViewModel implements UserChangeCallBack {
                 File photo = new File(getApplicationContext().getCacheDir(), fileName);
                 // 24 hours
                 if (photo.exists() && photo.lastModified() < Calendar.getInstance().getTimeInMillis() - 86400000){
-                    playerCoverLiveData.setValue(photo);
+                    fieldCoverLiveData.setValue(photo);
                 } else {
-                    fieldRepository.getCoverPhoto(new GetUserCoverCallBack() {
+                    fieldRepository.getCoverPhoto(new CallBack<File, String>() {
                         @Override
-                        public void onGetUserCoverCallBack(File photo) {
-                            playerCoverLiveData.setValue(photo);
+                        public void onSuccess(File file) {
+                            fieldCoverLiveData.setValue(file);
                         }
+
+                        @Override
+                        public void onFailure(String s) {
+
+                        }
+
                     }, field.getUrlCover(), getApplicationContext());
                 }
             }
@@ -119,9 +125,9 @@ public class FieldViewModel extends ViewModel implements UserChangeCallBack {
     }
 
     public void updateProfile(Map<String, Object> updateBasic) {
-        fieldRepository.updateProfile(updateBasic, new UpdateProfileCallBack() {
+        fieldRepository.updateProfile(updateBasic, new CallBack<String, String>() {
             @Override
-            public void onSuccess() {
+            public void onSuccess(String s) {
                 resultLiveData.setValue(Result.SUCCESS);
             }
 
@@ -134,12 +140,12 @@ public class FieldViewModel extends ViewModel implements UserChangeCallBack {
     }
 
     public  void updateImage(Uri uri, final String path , final boolean isAvatar){
-        fieldRepository.updateImage(uri, path, isAvatar, new UpdateImageCallBack() {
+        fieldRepository.updateImage(uri, path, isAvatar, new CallBack<String, String>() {
             @Override
             public void onSuccess(String url) {
                 Log.d("check updateUI", "onSuccess: VAO DAY R NE");
                 resultPhotoLiveData.setValue(Result.SUCCESS);
-                Field field = getInstance().playerLiveData.getValue();
+                Field field = getInstance().filedLiveData.getValue();
                 if (isAvatar){
                     field.setUrlAvatar(url);
                 } else {

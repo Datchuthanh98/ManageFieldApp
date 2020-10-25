@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.example.managefield.viewModel.FieldViewModel"></import>
+        <import type="com.example.managefield.viewModel.SessionField"></import>
     </data>
 
 
@@ -92,7 +92,7 @@
                       app:layout_constraintRight_toRightOf="parent"
                       app:layout_constraintTop_toBottomOf="@id/avatar"
                       android:textSize="30dp"
-                      android:text="@{FieldViewModel.getInstance().playerLiveData.name}"
+                      android:text="@{SessionField.getInstance().playerLiveData.name}"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"></TextView>
 
@@ -129,19 +129,19 @@
                                 android:layout_weight="1"
                                 android:id="@+id/phone"
                                 android:drawableStart="@drawable/ic_baseline_phone_24_green"
-                                android:text="@{FieldViewModel.getInstance().playerLiveData.phone}"
+                                android:text="@{SessionField.getInstance().playerLiveData.phone}"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"></TextView>
                             <TextView
                                 android:textStyle="bold"
                                 android:id="@+id/email"
                                 android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
-                                android:text="@{FieldViewModel.getInstance().playerLiveData.email}"
+                                android:text="@{SessionField.getInstance().playerLiveData.email}"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"></TextView>
 
                         <TextView
-                            android:text="@{FieldViewModel.getInstance().playerLiveData.address}"
+                            android:text="@{SessionField.getInstance().playerLiveData.address}"
                             android:textStyle="bold"
                             android:drawableStart="@drawable/ic_invite_24"
                             android:layout_width="match_parent"
@@ -154,7 +154,7 @@
                         <TextView
 
                             android:textStyle="bold"
-                            android:text="@{FieldViewModel.getInstance().playerLiveData.introduce}"
+                            android:text="@{SessionField.getInstance().playerLiveData.introduce}"
                             android:layout_width="match_parent"
                             android:layout_height="150dp"></TextView>
 

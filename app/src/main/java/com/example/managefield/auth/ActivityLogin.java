@@ -9,13 +9,14 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.managefield.Interface.LoginCallBack;
+
+import com.example.managefield.Interface.CallBack;
 import com.example.managefield.data.datasource.FieldDataSource;
 import com.example.managefield.databinding.ActivityLoginBinding;
 import com.example.managefield.databinding.LoadingLayoutBinding;
 import com.example.managefield.main.ActivityMain;
 import com.example.managefield.model.Field;
-import com.example.managefield.viewModel.FieldViewModel;
+import com.example.managefield.viewModel.SessionField;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,10 +64,10 @@ public class ActivityLogin extends AppCompatActivity {
 
     private  void loginWithEmail(){
         loadingDialog.show();
-        fieldDataSource.login(binding.txtEmail.getText().toString(), binding.txtPassword.getText().toString(), new LoginCallBack() {
+        fieldDataSource.login(binding.txtEmail.getText().toString(), binding.txtPassword.getText().toString(), new CallBack<Field, String>() {
             @Override
             public void onSuccess(Field field) {
-                FieldViewModel.getInstance().onUserChange(field);
+                SessionField.getInstance().onUserChange(field);
                 loadingDialog.dismiss();
                 Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
                 startActivity(intent);

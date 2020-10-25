@@ -25,6 +25,7 @@ public class ActivityMain extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_account_circle_black_24dp);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_account_circle_black_24dp);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_account_circle_black_24dp);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_account_circle_black_24dp);
 
     }
 

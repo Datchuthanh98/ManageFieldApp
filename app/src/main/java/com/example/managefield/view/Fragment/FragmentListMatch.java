@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -22,9 +23,13 @@ import com.example.managefield.view.Adapter.RecycleViewAdapterListMatchVertical;
 import com.example.managefield.viewModel.ListBookingViewModel;
 import com.example.managefield.viewModel.ListMatchViewModel;
 import com.example.managefield.viewModel.SessionStateData;
+import com.example.managefield.viewModel.UpdateScoreViewModel;
+
+import java.util.Map;
 
 public class FragmentListMatch extends Fragment {
     private ListMatchViewModel viewModel ;
+    private UpdateScoreViewModel updateScoreViewModel;
     private FragmentListMatchBinding binding;
 
     @Nullable
@@ -39,31 +44,41 @@ public class FragmentListMatch extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(ListMatchViewModel.class);
+        updateScoreViewModel = new ViewModelProvider(getActivity()).get(UpdateScoreViewModel.class);
         RecycleViewAdapterListMatchVertical adapter = viewModel.getAdapterListMatch();
         adapter.setFm(getParentFragmentManager());
         binding.recycleViewListBookingVertical.setAdapter(viewModel.getAdapterListMatch());
         binding.recycleViewListBookingVertical.setLayoutManager(new LinearLayoutManager(getContext()));
-        observerLiveDate();
+        observerLiveData();
     }
 
 
 
-    private void observerLiveDate() {
-        viewModel.getResultLiveData().observe(getViewLifecycleOwner(), new Observer<Result>() {
-            @Override
-            public void onChanged(Result result) {
-                if (result == null) return;
-                if (result == Result.SUCCESS) {
-                    viewModel.getListMatch();
-                } else if (result == Result.FAILURE) {
-                }
-            }
-        });
-
+    private void observerLiveData() {
         SessionStateData.getInstance().getDatalistMatch().observe(getViewLifecycleOwner(), new Observer<DataState>() {
             @Override
             public void onChanged(DataState dataState) {
                 viewModel.getListMatch();
+            }
+        });
+
+        updateScoreViewModel.getScoreList().observe(getViewLifecycleOwner(), new Observer<Map<String, Object>>() {
+            @Override
+            public void onChanged(Map<String, Object> map) {
+                if(map !=null){
+                    viewModel.updateScoreMatch(map);
+                    updateScoreViewModel.setScoreList(null);
+                }
+            }
+        });
+
+        viewModel.getResultUpdateScore().observe(getViewLifecycleOwner(), new Observer<Result>() {
+            @Override
+            public void onChanged(Result result) {
+                if(result == Result.SUCCESS){
+                    Toast.makeText(getContext(),"Update List Match",Toast.LENGTH_SHORT).show();
+                    viewModel.getListMatch();
+                }
             }
         });
     }

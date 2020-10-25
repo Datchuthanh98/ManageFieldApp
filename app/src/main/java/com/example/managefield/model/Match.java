@@ -2,7 +2,7 @@ package com.example.managefield.model;
 
 public class Match {
     private  String id;
-    private  String idBook;
+    private  Booking idBooking;
     private  String scoreHome;
     private  String scoreAway;
     private  Boolean active ;
@@ -18,12 +18,12 @@ public class Match {
         this.id = id;
     }
 
-    public String getIdBook() {
-        return idBook;
+    public Booking getIdBooking() {
+        return idBooking;
     }
 
-    public void setIdBook(String idBook) {
-        this.idBook = idBook;
+    public void setIdBooking(Booking idBooking) {
+        this.idBooking = idBooking;
     }
 
     public String getScoreHome() {

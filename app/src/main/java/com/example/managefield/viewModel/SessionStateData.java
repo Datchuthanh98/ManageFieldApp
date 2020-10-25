@@ -8,6 +8,7 @@ import com.example.managefield.data.enumeration.Result;
 public class SessionStateData {
       private MutableLiveData<DataState> datalistMatch = new MutableLiveData<>(DataState.NOW);
       private MutableLiveData<DataState> datalistBooking = new MutableLiveData<>(DataState.NOW);
+    private MutableLiveData<DataState> datalistTime = new MutableLiveData<>(DataState.NOW);
       private static SessionStateData instance;
     public static SessionStateData getInstance() {
         if (instance == null) {
@@ -31,5 +32,13 @@ public class SessionStateData {
 
     public void setDatalistBooking(DataState datalistBooking) {
         this.datalistBooking.setValue(datalistBooking);
+    }
+
+    public MutableLiveData<DataState> getDatalistTime() {
+        return datalistTime;
+    }
+
+    public void setDatalistTime(DataState datalistTime) {
+        this.datalistTime.setValue(datalistTime);
     }
 }

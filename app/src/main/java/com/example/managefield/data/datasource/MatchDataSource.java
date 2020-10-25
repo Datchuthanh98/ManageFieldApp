@@ -4,11 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.managefield.Interface.AcceptBooking;
-import com.example.managefield.Interface.AddBookingField;
-import com.example.managefield.Interface.DeclineBooking;
-import com.example.managefield.Interface.LoadListBookingCallBack;
-import com.example.managefield.Interface.LoadListMatchCallBack;
+import com.example.managefield.Interface.CallBack;
 import com.example.managefield.model.Booking;
 import com.example.managefield.model.Match;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -17,6 +13,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +26,7 @@ public class MatchDataSource {
     private static final String TAG = "matchdata";
     static MatchDataSource instance;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFunctions functions = FirebaseFunctions.getInstance();
 
 
     public static MatchDataSource getInstance() {
@@ -36,59 +36,61 @@ public class MatchDataSource {
         return instance;
     }
 
-    public void loadListBooking(final LoadListBookingCallBack loadListBookingCallBack) {
-        db.collection("Booking").whereEqualTo("approve", null).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+    public void loadListBooking(final CallBack<List<Booking>,String> loadListBookingCallBack) {
+        functions.getHttpsCallable("getListBookingByField").call("5QEDqMLEceWf7Aa1wvJYVsBE2Yn2").addOnSuccessListener(new OnSuccessListener<HttpsCallableResult>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                List<Booking> bookingList = new ArrayList<>();
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
-                        Booking booking = document.toObject(Booking.class);
-
-                        bookingList.add(booking);
-                    }
-                    loadListBookingCallBack.onSuccess(bookingList);
-                } else {
+            public void onSuccess(HttpsCallableResult httpsCallableResult) {
+                Gson gson= new Gson();
+                List<Map> listTeamMaps = (List<Map>) httpsCallableResult.getData();
+                Log.d("match", "Success: "+listTeamMaps.size());
+                List<Booking> listBooking = new ArrayList<>();
+                if(listTeamMaps == null){
                     loadListBookingCallBack.onSuccess(null);
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-
-    }
-
-
-    public void loadListMatch(final LoadListMatchCallBack loadListMatchCallBack) {
-        db.collection("Match").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                List<Match> matchList = new ArrayList<>();
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
-                        Match match = document.toObject(Match.class);
-                        matchList.add(match);
+                }else{
+                    for (Map teamMap : listTeamMaps){
+                        Booking booking = gson.fromJson(gson.toJson(teamMap), Booking.class);
+                        listBooking.add(booking);
                     }
-
-                    loadListMatchCallBack.onSuccess(matchList);
-                } else {
-                    loadListMatchCallBack.onSuccess(null);
+                    loadListBookingCallBack.onSuccess(listBooking);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                Log.d("match", "failure: "+e.getMessage());
+            }
+        });
+    }
 
+
+    public void loadListMatch(final CallBack<List<Match>,String> loadListMatchCallBack) {
+        functions.getHttpsCallable("getAllListMatch").call().addOnSuccessListener(new OnSuccessListener<HttpsCallableResult>() {
+            @Override
+            public void onSuccess(HttpsCallableResult httpsCallableResult) {
+                Gson gson= new Gson();
+                List<Map> listTeamMaps = (List<Map>) httpsCallableResult.getData();
+                List<Match> listMatch = new ArrayList<>();
+                if(listTeamMaps == null){
+                    loadListMatchCallBack.onSuccess(null);
+                }else{
+                    for (Map teamMap : listTeamMaps){
+                        Match match = gson.fromJson(gson.toJson(teamMap), Match.class);
+                        listMatch.add(match);
+                    }
+                    loadListMatchCallBack.onSuccess(listMatch);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                loadListMatchCallBack.onFailure(e.getMessage());
             }
         });
 
     }
 
 
-    public void acceptBooking(final String idBooking, final AcceptBooking acceptBooking) {
+    public void acceptBooking(final String idBooking, final CallBack<String,String> acceptBooking) {
         DocumentReference ref = db.collection("Match").document();
         Map<String, Object> map = new HashMap<>();
         map.put("id", ref.getId());
@@ -102,26 +104,45 @@ public class MatchDataSource {
                 db.collection("Booking").document(idBooking).update("approve", true).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        acceptBooking.onSuccess();
+                        acceptBooking.onSuccess("");
                     }
                 });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                acceptBooking.onFailure();
+                acceptBooking.onFailure(e.getMessage());
             }
         });
 
-
     }
 
-    public void declineBooking(String idBooking, final DeclineBooking declineBooking) {
+    public void declineBooking(String idBooking, final CallBack declineBooking) {
 
         db.collection("Booking").document(idBooking).update("approve", true).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                declineBooking.onSuccess();
+                declineBooking.onSuccess("");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                declineBooking.onSuccess(e.getMessage());
+
+            }
+        });
+    }
+
+    public void updateScoreMatch(Map<String,Object>map , final  CallBack<String,String> callBack){
+        db.collection("Match").document((String) map.get("id")).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                callBack.onSuccess("");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                callBack.onFailure("");
             }
         });
     }

@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.managefield.Interface.AcceptBooking;
-import com.example.managefield.Interface.DeclineBooking;
-import com.example.managefield.Interface.LoadListBookingCallBack;
+
+import com.example.managefield.Interface.CallBack;
+import com.example.managefield.data.enumeration.DataState;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.data.repository.MatchRepository;
 import com.example.managefield.model.Booking;
@@ -21,7 +21,6 @@ public class ListBookingViewModel extends ViewModel{
     private MatchRepository matchRepository = MatchRepository.getInstance();
     private RecycleViewAdapterListBookingVertical adapterListBooking = new RecycleViewAdapterListBookingVertical();
     private MutableLiveData<List<Booking>> listBookingFieldLiveData = new MutableLiveData<>();
-    private MutableLiveData<Result> resultLiveData = new MutableLiveData<>(null);
 
     public ListBookingViewModel(){
         getListBooking();
@@ -29,7 +28,7 @@ public class ListBookingViewModel extends ViewModel{
     }
 
     public void  getListBooking(){
-        matchRepository.getListBooking(new LoadListBookingCallBack() {
+        matchRepository.getListBooking(new CallBack<List<Booking>, String>() {
             @Override
             public void onSuccess(List<Booking> bookingList) {
                 if(bookingList == null){
@@ -53,39 +52,40 @@ public class ListBookingViewModel extends ViewModel{
     }
 
     public  void acceptBooking(String id) {
-        matchRepository.acceptBooking(id, new AcceptBooking() {
+        matchRepository.acceptBooking(id, new CallBack<String, String>() {
             @Override
-            public void onSuccess() {
-                resultLiveData.setValue(Result.SUCCESS);
+            public void onSuccess(String s) {
+                SessionStateData.getInstance().setDatalistBooking(DataState.NEW);
+                SessionStateData.getInstance().setDatalistMatch(DataState.NEW);
             }
 
             @Override
-            public void onFailure() {
-                resultLiveData.setValue(Result.FAILURE);
+            public void onFailure(String s) {
+
             }
+
+            ;
         });
     }
 
     public  void declineBooking(String  id){
-        matchRepository.declineBooking(id, new DeclineBooking() {
+        matchRepository.declineBooking(id, new CallBack<String, String>() {
             @Override
-            public void onSuccess() {
-                resultLiveData.setValue(Result.SUCCESS);
+            public void onSuccess(String s) {
+                SessionStateData.getInstance().setDatalistBooking(DataState.NEW);
+                SessionStateData.getInstance().setDatalistMatch(DataState.NEW);
             }
 
             @Override
-            public void onFailure() {
-                resultLiveData.setValue(Result.FAILURE);
+            public void onFailure(String s) {
+
             }
+
         });
 
     }
 
 
-
-    public LiveData<Result> getResultLiveData() {
-        return resultLiveData;
-    }
 
     public RecycleViewAdapterListBookingVertical getAdapterListBooking() {
         return adapterListBooking;

@@ -17,7 +17,7 @@ import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.databinding.FragmentEditPlayerIntroduceBinding;
 import com.example.managefield.databinding.LoadingLayoutBinding;
 import com.example.managefield.model.Field;
-import com.example.managefield.viewModel.FieldViewModel;
+import com.example.managefield.viewModel.SessionField;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.HashMap;
@@ -26,7 +26,7 @@ import java.util.Map;
 public class FragmentEditFieldIntroduce extends BottomSheetDialogFragment {
 
      private FragmentEditPlayerIntroduceBinding binding;
-    private FieldViewModel session = FieldViewModel.getInstance();
+    private SessionField session = SessionField.getInstance();
     private Dialog loadingDialog;
     private LoadingLayoutBinding loadingLayoutBinding;
     private  Map<String, Object> data = new HashMap<>();
@@ -98,9 +98,9 @@ public class FragmentEditFieldIntroduce extends BottomSheetDialogFragment {
     }
 
     private  void updateUIPlayer (){
-        Field field = FieldViewModel.getInstance().getPlayerLiveData().getValue();
+        Field field = SessionField.getInstance().getPlayerLiveData().getValue();
         field.setIntroduce(binding.txtIntroduce.getText().toString());
-        FieldViewModel.getInstance().setPlayerLiveData(field);
+        SessionField.getInstance().setPlayerLiveData(field);
     }
 
 }

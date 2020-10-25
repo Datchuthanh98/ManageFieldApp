@@ -1,8 +1,9 @@
 package com.example.managefield.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Field {
+public class Field implements Serializable {
     private  String id ;
     private  String address;
     private  String name;

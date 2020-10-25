@@ -4,6 +4,7 @@ import com.google.firebase.Timestamp;
 
 public class Comment {
     private String id ;
+    private Player player;
     private  String comment ;
     private Timestamp timeComment;
 
@@ -18,7 +19,13 @@ public class Comment {
         this.id = id;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
     public String getComment() {
         return comment;

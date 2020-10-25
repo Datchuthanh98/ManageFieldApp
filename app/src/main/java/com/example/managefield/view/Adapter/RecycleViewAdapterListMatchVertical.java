@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managefield.databinding.ItemBookingVerticalBinding;
 import com.example.managefield.databinding.ItemMatchVerticalBinding;
+import com.example.managefield.main.ActivityMain;
 import com.example.managefield.model.Booking;
 import com.example.managefield.model.Match;
+import com.example.managefield.view.Fragment.FragmentUpdateScore;
 import com.example.managefield.viewModel.ListBookingViewModel;
 import com.example.managefield.viewModel.ListMatchViewModel;
+import com.example.managefield.viewModel.UpdateScoreViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +27,19 @@ import java.util.List;
 public class RecycleViewAdapterListMatchVertical extends RecyclerView.Adapter<RecycleViewAdapterListMatchVertical.MyViewHolder> {
     private FragmentManager fm;
     private List<Match> matches = new ArrayList<>();
-    private ListMatchViewModel listMatchViewModel;
+
+
+
+
     public RecycleViewAdapterListMatchVertical() {
     }
+
 
     public RecycleViewAdapterListMatchVertical(FragmentManager fm) {
         this.fm = fm;
     }
 
-    public void setListBookingViewModel(ListMatchViewModel listMatchViewModel) {
-        this.listMatchViewModel = listMatchViewModel;
-    }
+
 
     public void setFm(FragmentManager fm) {
         this.fm = fm;
@@ -61,11 +66,11 @@ public class RecycleViewAdapterListMatchVertical extends RecyclerView.Adapter<Re
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+        holder.binding.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ActivityMainField activityHome = (ActivityMainField) holder.itemView.getContext();
-//                activityHome.addFragment(new FragmentMainProfileMatch());
+                ActivityMain activityHome = (ActivityMain) holder.itemView.getContext();
+                activityHome.addFragment(new FragmentUpdateScore(matches.get(position).getId()));
             }
         });
 

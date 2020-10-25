@@ -17,7 +17,7 @@ import com.example.managefield.auth.ActivityLogin;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.databinding.FragmentProfileMyselfBinding;
 import com.example.managefield.main.ActivityMain;
-import com.example.managefield.viewModel.FieldViewModel;
+import com.example.managefield.viewModel.SessionField;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
@@ -27,7 +27,7 @@ import java.io.File;
 public class FragmentProfileMyField extends Fragment {
 
     private FragmentProfileMyselfBinding binding;
-    private FieldViewModel session = FieldViewModel.getInstance();
+    private SessionField session = SessionField.getInstance();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,14 +65,14 @@ public class FragmentProfileMyField extends Fragment {
 
     private void observeLiveData(final Context context) {
         // CreatePhoto
-        FieldViewModel.getInstance().getAvatarLiveData().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<File>() {
+        SessionField.getInstance().getAvatarLiveData().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<File>() {
             @Override
             public void onChanged(File file) {
                 Picasso.get().load(file).into(binding.avatar);
             }
         });
 
-        FieldViewModel.getInstance().getCoverLiveData().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<File>() {
+        SessionField.getInstance().getCoverLiveData().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<File>() {
             @Override
             public void onChanged(File file) {
                 Picasso.get().load(file).into(binding.cover);

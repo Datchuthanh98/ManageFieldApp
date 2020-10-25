@@ -25,7 +25,7 @@ import com.example.managefield.R;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.databinding.FragmentEditMainPlayerBinding;
 import com.example.managefield.databinding.LoadingLayoutBinding;
-import com.example.managefield.viewModel.FieldViewModel;
+import com.example.managefield.viewModel.SessionField;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +40,7 @@ public class FragmentEditMainField extends Fragment {
     public static final int RESULT_LOAD_IMG_AVATAR = 1012;
     public static final int RESULT_LOAD_IMG_COVER = 1013;
     private  String urlAvatar , urlCover;
-    private FieldViewModel session = FieldViewModel.getInstance();
+    private SessionField session = SessionField.getInstance();
 
     @Nullable
     @Override
@@ -123,14 +123,14 @@ public class FragmentEditMainField extends Fragment {
 
     private void observeLiveData(final Context context) {
         //init Photo
-        FieldViewModel.getInstance().getAvatarLiveData().observe(getViewLifecycleOwner(), new Observer<File>() {
+        SessionField.getInstance().getAvatarLiveData().observe(getViewLifecycleOwner(), new Observer<File>() {
             @Override
             public void onChanged(File file) {
                 Picasso.get().load(file).into(binding.avatar);
             }
         });
 
-        FieldViewModel.getInstance().getCoverLiveData().observe(getViewLifecycleOwner(), new Observer<File>() {
+        SessionField.getInstance().getCoverLiveData().observe(getViewLifecycleOwner(), new Observer<File>() {
             @Override
             public void onChanged(File file) {
                 Picasso.get().load(file).into(binding.cover);

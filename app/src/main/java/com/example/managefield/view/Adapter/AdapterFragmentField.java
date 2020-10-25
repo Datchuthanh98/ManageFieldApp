@@ -8,10 +8,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.managefield.view.Fragment.FragmentListBooking;
 import com.example.managefield.view.Fragment.FragmentListMatch;
+import com.example.managefield.view.Fragment.FragmentListTime;
 import com.example.managefield.view.Fragment.FragmentProfileMyField;
 
 public class AdapterFragmentField extends FragmentPagerAdapter {
-    int numTab = 3;
+    int numTab = 4;
     public AdapterFragmentField(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
@@ -21,11 +22,13 @@ public class AdapterFragmentField extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new FragmentProfileMyField();
-            case 1:
                 return new FragmentListMatch();
-            case 2:
+            case 1:
                 return new FragmentListBooking();
+            case 2:
+                return new FragmentListTime();
+            case 3:
+                return new FragmentProfileMyField();
         }
         return  null;
     }
@@ -40,11 +43,13 @@ public class AdapterFragmentField extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position){
             case 0:
-                return "Profile";
-            case 1:
                 return "List Match";
-            case 2:
+            case 1:
                 return "List Request";
+            case 2:
+                return "List Time";
+            case 3:
+                return "List Profile";
         }
         return null;
     }

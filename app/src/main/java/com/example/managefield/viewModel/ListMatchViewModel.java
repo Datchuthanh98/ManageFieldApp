@@ -6,10 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.managefield.Interface.AcceptBooking;
-import com.example.managefield.Interface.DeclineBooking;
-import com.example.managefield.Interface.LoadListBookingCallBack;
-import com.example.managefield.Interface.LoadListMatchCallBack;
+import com.example.managefield.Interface.CallBack;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.data.repository.MatchRepository;
 import com.example.managefield.model.Booking;
@@ -19,20 +16,21 @@ import com.example.managefield.view.Adapter.RecycleViewAdapterListMatchVertical;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ListMatchViewModel extends ViewModel{
     private MatchRepository matchRepository = MatchRepository.getInstance();
     private RecycleViewAdapterListMatchVertical adapterListMatchVertical = new RecycleViewAdapterListMatchVertical();
     private MutableLiveData<List<Match>> listBookingFieldLiveData = new MutableLiveData<>();
-    private MutableLiveData<Result> resultLiveData = new MutableLiveData<>(null);
+    private MutableLiveData<Result> resultUpdateScore = new MutableLiveData<>();
 
     public ListMatchViewModel(){
         getListMatch();
-        adapterListMatchVertical.setListBookingViewModel(this);
+
     }
 
     public void  getListMatch(){
-        matchRepository.getListMatch(new LoadListMatchCallBack() {
+        matchRepository.getListMatch(new CallBack<List<Match>, String>() {
             @Override
             public void onSuccess(List<Match> matchList) {
                 if(matchList == null){
@@ -53,13 +51,25 @@ public class ListMatchViewModel extends ViewModel{
     }
 
 
-
-    public LiveData<Result> getResultLiveData() {
-        return resultLiveData;
-    }
-
     public RecycleViewAdapterListMatchVertical getAdapterListMatch() {
         return adapterListMatchVertical;
     }
 
+    public void updateScoreMatch(Map<String,Object> map){
+        matchRepository.updateScoreMatch(map, new CallBack<String, String>() {
+            @Override
+            public void onSuccess(String s) {
+                resultUpdateScore.setValue(Result.SUCCESS);
+            }
+
+            @Override
+            public void onFailure(String s) {
+                resultUpdateScore.setValue(Result.FAILURE);
+            }
+        });
+    }
+
+    public MutableLiveData<Result> getResultUpdateScore() {
+        return resultUpdateScore;
+    }
 }

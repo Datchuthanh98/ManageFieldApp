@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.example.managefield.viewModel.SessionField"></import>
+
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,19 +23,19 @@
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Edit information basic"
+                    android:text="Create Team"
                     android:gravity="center_vertical"
                     android:textSize="20dp"
                     android:layout_weight="1"/>
                 <ImageButton
-                    android:id="@+id/image_btn_1"
+                    android:id="@+id/btnReset"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingHorizontal="15dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_baseline_replay_white_24"/>
                 <ImageButton
-                    android:id="@+id/image_btn_2"
+                    android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingHorizontal="15dp"
@@ -52,51 +52,48 @@
             android:layout_width="match_parent"
             >
             <TextView
+
                 android:drawableStart="@drawable/ic_baseline_account_box_24_blue"
-                android:text=" Name Player"
+                android:text=" Start Time"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{SessionField.getInstance().playerLiveData.name}"
-                android:id="@+id/txtName"
+                android:id="@+id/txtStartTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
                 android:drawableStart="@drawable/ic_baseline_phone_24_green"
-                android:text=" Phone"
+                android:text=" EndTime"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{SessionField.getInstance().playerLiveData.phone}"
-                android:id="@+id/txtPhone"
+                android:id="@+id/txtEndTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
                 android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
-                android:text="Email"
+                android:text=" Sân số"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{SessionField.getInstance().playerLiveData.email}"
-                android:id="@+id/txtEmail"
+                android:id="@+id/txtNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
-                android:drawableStart="@drawable/ic_join_24"
-                android:text="Address"
+                android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
+                android:text=" Phí sân"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{SessionField.getInstance().playerLiveData.address}"
-                android:id="@+id/txtAddress"
+                android:id="@+id/txtCost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
 
