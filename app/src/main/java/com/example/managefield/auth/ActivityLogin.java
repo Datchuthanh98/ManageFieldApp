@@ -16,7 +16,7 @@ import com.example.managefield.databinding.ActivityLoginBinding;
 import com.example.managefield.databinding.LoadingLayoutBinding;
 import com.example.managefield.main.ActivityMain;
 import com.example.managefield.model.Field;
-import com.example.managefield.viewModel.SessionField;
+import com.example.managefield.Session.SessionField;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;

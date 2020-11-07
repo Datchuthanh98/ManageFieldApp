@@ -1,15 +1,12 @@
 package com.example.managefield.viewModel;
 
-import android.util.Log;
-
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 
 import com.example.managefield.Interface.CallBack;
+import com.example.managefield.Session.SessionStateData;
 import com.example.managefield.data.enumeration.DataState;
-import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.data.repository.MatchRepository;
 import com.example.managefield.model.Booking;
 import com.example.managefield.view.Adapter.RecycleViewAdapterListBookingVertical;
@@ -23,12 +20,12 @@ public class ListBookingViewModel extends ViewModel{
     private MutableLiveData<List<Booking>> listBookingFieldLiveData = new MutableLiveData<>();
 
     public ListBookingViewModel(){
-        getListBooking();
+//        getListBooking();
         adapterListBooking.setListBookingViewModel(this);
     }
 
-    public void  getListBooking(){
-        matchRepository.getListBooking(new CallBack<List<Booking>, String>() {
+    public void  getListBooking(String idField){
+        matchRepository.getListBooking(idField,new CallBack<List<Booking>, String>() {
             @Override
             public void onSuccess(List<Booking> bookingList) {
                 if(bookingList == null){

@@ -17,7 +17,7 @@ import com.example.managefield.auth.ActivityLogin;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.databinding.FragmentProfileMyselfBinding;
 import com.example.managefield.main.ActivityMain;
-import com.example.managefield.viewModel.SessionField;
+import com.example.managefield.Session.SessionField;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;

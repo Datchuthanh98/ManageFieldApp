@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import com.example.managefield.Interface.CallBack;
 import com.example.managefield.model.TimeGame;
-import com.example.managefield.viewModel.SessionField;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -85,5 +84,19 @@ public class TimeDataSource {
                 createTime.onFailure(e.getMessage());
             }
         });
+    }
+
+    public void updateTime(Map<String,Object> map,final CallBack<String, String> updateTime) {
+       db.collection("TimeGame").document((String) map.get("id")).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+           @Override
+           public void onSuccess(Void aVoid) {
+              updateTime.onSuccess("");
+           }
+       }).addOnFailureListener(new OnFailureListener() {
+           @Override
+           public void onFailure(@NonNull Exception e) {
+           updateTime.onFailure("");
+           }
+       });
     }
 }

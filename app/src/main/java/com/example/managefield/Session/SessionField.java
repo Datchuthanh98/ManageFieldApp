@@ -1,4 +1,4 @@
-package com.example.managefield.viewModel;
+package com.example.managefield.Session;
 
 import android.app.Application;
 import android.content.Context;
@@ -13,9 +13,11 @@ import com.example.managefield.Interface.FieldChangeCallBack;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.data.repository.FieldRepository;
 import com.example.managefield.model.Field;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -57,9 +59,28 @@ public class SessionField implements FieldChangeCallBack {
 
     public LiveData<File>  getCoverLiveData() {return  fieldCoverLiveData ;};
 
+    public MutableLiveData<Field> getFiledLiveData() {
+        return filedLiveData;
+    }
 
     @Override
     public void onUserChange(Field field) {
+
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    FirebaseInstanceId.getInstance().deleteInstanceId();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+
+
         filedLiveData.setValue(field);
         if (field != null) {
             if (!field.getUrlAvatar().isEmpty()) {

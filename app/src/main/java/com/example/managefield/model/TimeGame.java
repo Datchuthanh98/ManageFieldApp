@@ -1,11 +1,22 @@
 package com.example.managefield.model;
 
+import java.util.Map;
+
 public class TimeGame {
     private  String id;
     private  String idField;
     private  String startTime;
     private  String endTime;
     private  String cost;
+    private  String position;
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
     public TimeGame() {
     }

@@ -24,8 +24,8 @@ public class MatchRepository {
         return instance;
     }
 
-    public void getListBooking(CallBack<List<Booking>,String> loadListBookingCallBack){
-        matchDataSource.loadListBooking(loadListBookingCallBack);
+    public void getListBooking(String idField,CallBack<List<Booking>,String> loadListBookingCallBack){
+        matchDataSource.loadListBooking(idField,loadListBookingCallBack);
     }
 
     public void getListMatch(CallBack<List<Match>,String> loadListMatchCallBack){

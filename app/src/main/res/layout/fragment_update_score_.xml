@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.example.managefield.viewModel.SessionField"></import>
+        <import type="com.example.managefield.Session.SessionField"></import>
     </data>
     <LinearLayout
         android:background="@android:color/white"
@@ -24,17 +24,11 @@
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Update score of Match"
+                    android:text="Update score "
                     android:gravity="center_vertical"
                     android:textSize="20dp"
                     android:layout_weight="1"/>
-                <ImageButton
-                    android:id="@+id/image_btn_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingHorizontal="15dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_baseline_replay_white_24"/>
+
                 <ImageButton
                     android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
@@ -53,7 +47,7 @@
             android:layout_width="match_parent"
             >
             <TextView
-                android:drawableStart="@drawable/ic_baseline_account_box_24_blue"
+                android:drawableStart="@drawable/goal"
                 android:text=" Score Team Home"
                 android:textStyle="bold"
                 android:textSize="15dp"
@@ -65,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
-                android:drawableStart="@drawable/ic_baseline_phone_24_green"
+                android:drawableStart="@drawable/goal"
                 android:text=" Score Team Away"
                 android:textStyle="bold"
                 android:textSize="15dp"

@@ -3,6 +3,7 @@ package com.example.managefield.view.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -14,9 +15,11 @@ import com.example.managefield.main.ActivityMain;
 import com.example.managefield.model.Booking;
 import com.example.managefield.model.TimeGame;
 import com.example.managefield.view.Fragment.FragmentUpdateScore;
+import com.example.managefield.view.Fragment.FragmentUpdateTime;
 import com.example.managefield.viewModel.ListBookingViewModel;
 import com.example.managefield.viewModel.ListTimeViewModel;
 import com.example.managefield.viewModel.UpdateScoreViewModel;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +30,12 @@ import java.util.List;
 public class RecycleViewAdapterListTimeVertical extends RecyclerView.Adapter<RecycleViewAdapterListTimeVertical.MyViewHolder> {
     private FragmentManager fm;
     private List<TimeGame> timeGameList = new ArrayList<>();
-    private ListTimeViewModel listTimeViewModel;
+
     public RecycleViewAdapterListTimeVertical() {
     }
 
     public RecycleViewAdapterListTimeVertical(FragmentManager fm) {
         this.fm = fm;
-    }
-
-    public void setListTimeViewModel(ListTimeViewModel listTimeViewModel) {
-        this.listTimeViewModel = listTimeViewModel;
     }
 
     public void setFm(FragmentManager fm) {
@@ -71,20 +70,22 @@ public class RecycleViewAdapterListTimeVertical extends RecyclerView.Adapter<Rec
             }
         });
 
-//        holder.binding.btnAccept.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listBookingViewModel.acceptBooking(bookingList.get(position).getId());
-//            }
-//        });
-//
-//
-//        holder.binding.btnDecline.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listBookingViewModel.declineBooking(bookingList.get(position).getId());
-//            }
-//        });
+        holder.binding.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialogFragment dialog = new FragmentUpdateTime(timeGameList.get(position));
+                dialog.show(((ActivityMain) holder.itemView.getContext()).getSupportFragmentManager(), null);
+
+            }
+        });
+
+
+        holder.binding.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         holder.binding.setTimeGame(timeGameList.get(position));
     }

@@ -7,8 +7,9 @@
         <import type="com.example.managefield.Session.SessionField"></import>
     </data>
     <LinearLayout
+        android:background="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -23,19 +24,13 @@
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Edit information basic"
+                    android:text="Update time "
                     android:gravity="center_vertical"
                     android:textSize="20dp"
                     android:layout_weight="1"/>
+
                 <ImageButton
-                    android:id="@+id/image_btn_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingHorizontal="15dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_baseline_replay_white_24"/>
-                <ImageButton
-                    android:id="@+id/image_btn_2"
+                    android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingHorizontal="15dp"
@@ -52,54 +47,53 @@
             android:layout_width="match_parent"
             >
             <TextView
-                android:drawableStart="@drawable/ic_baseline_account_box_24_blue"
-                android:text=" Name Player"
+                android:drawableStart="@drawable/time_icon"
+                android:text=" Start time"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{SessionField.getInstance().playerLiveData.name}"
-                android:id="@+id/txtName"
+                android:text="0"
+                android:id="@+id/txtStartTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
-                android:drawableStart="@drawable/ic_baseline_phone_24_green"
-                android:text=" Phone"
+                android:drawableStart="@drawable/time_icon"
+                android:text=" End Time"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{SessionField.getInstance().playerLiveData.phone}"
-                android:id="@+id/txtPhone"
+                android:text="0"
+                android:id="@+id/txtEndTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
-                android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
-                android:text="Email"
+                android:drawableStart="@drawable/money"
+                android:text=" Cost"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{SessionField.getInstance().playerLiveData.email}"
-                android:id="@+id/txtEmail"
+                android:text="0"
+                android:id="@+id/txtCost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
-                android:drawableStart="@drawable/ic_join_24"
-                android:text="Address"
+                android:drawableStart="@drawable/field_24"
+                android:text=" Position Field"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:text="@{SessionField.getInstance().playerLiveData.address}"
-                android:id="@+id/txtAddress"
+                android:text="0"
+                android:id="@+id/txtPosition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
-
         </LinearLayout>
     </LinearLayout>
 </layout>

@@ -10,19 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.managefield.data.enumeration.DataState;
 import com.example.managefield.data.enumeration.Result;
-import com.example.managefield.databinding.FragmentListBookingBinding;
 import com.example.managefield.databinding.FragmentListMatchBinding;
-import com.example.managefield.view.Adapter.RecycleViewAdapterListBookingVertical;
 import com.example.managefield.view.Adapter.RecycleViewAdapterListMatchVertical;
-import com.example.managefield.viewModel.ListBookingViewModel;
 import com.example.managefield.viewModel.ListMatchViewModel;
-import com.example.managefield.viewModel.SessionStateData;
+import com.example.managefield.Session.SessionStateData;
 import com.example.managefield.viewModel.UpdateScoreViewModel;
 
 import java.util.Map;

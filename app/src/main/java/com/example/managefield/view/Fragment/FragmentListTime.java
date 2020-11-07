@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,14 +14,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.managefield.data.enumeration.DataState;
-import com.example.managefield.data.enumeration.Result;
-import com.example.managefield.databinding.FragmentListMatchBinding;
 import com.example.managefield.databinding.FragmentListTiemBinding;
-import com.example.managefield.view.Adapter.RecycleViewAdapterListMatchVertical;
 import com.example.managefield.view.Adapter.RecycleViewAdapterListTimeVertical;
-import com.example.managefield.viewModel.ListMatchViewModel;
 import com.example.managefield.viewModel.ListTimeViewModel;
-import com.example.managefield.viewModel.SessionStateData;
+import com.example.managefield.Session.SessionStateData;
 
 public class FragmentListTime extends Fragment {
     private ListTimeViewModel viewModel ;
@@ -39,7 +34,7 @@ public class FragmentListTime extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(ListTimeViewModel.class);
+        viewModel = new ViewModelProvider(getActivity()).get(ListTimeViewModel.class);
         RecycleViewAdapterListTimeVertical adapter = viewModel.getAdapterListTime();
         adapter.setFm(getParentFragmentManager());
         binding.recycleViewListTimeVertical.setAdapter(viewModel.getAdapterListTime());

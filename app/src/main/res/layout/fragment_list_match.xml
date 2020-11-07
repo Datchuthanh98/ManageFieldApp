@@ -12,6 +12,7 @@
     android:layout_height="match_parent"
 >
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="#d1e0e0"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,12 +24,6 @@
         android:orientation="vertical"
         tools:ignore="NotSibling">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Danh sách trận đấu"
-            android:textSize="30dp"></TextView>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -37,14 +32,13 @@
                 android:id="@+id/btnDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tìm kiếm:"
+                android:drawableStart="@drawable/seach_icon"
                 android:textSize="20dp"></TextView>
-
             <EditText
                 android:id="@+id/txtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="tên cầu thủ"/>
+                />
         </LinearLayout>
 
 

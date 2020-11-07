@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 public class MatchDataSource {
-    private static final String TAG = "matchdata";
     static MatchDataSource instance;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseFunctions functions = FirebaseFunctions.getInstance();
@@ -36,8 +35,8 @@ public class MatchDataSource {
         return instance;
     }
 
-    public void loadListBooking(final CallBack<List<Booking>,String> loadListBookingCallBack) {
-        functions.getHttpsCallable("getListBookingByField").call("5QEDqMLEceWf7Aa1wvJYVsBE2Yn2").addOnSuccessListener(new OnSuccessListener<HttpsCallableResult>() {
+    public void loadListBooking(String idField,final CallBack<List<Booking>,String> loadListBookingCallBack) {
+        functions.getHttpsCallable("getListBookingByField").call(idField).addOnSuccessListener(new OnSuccessListener<HttpsCallableResult>() {
             @Override
             public void onSuccess(HttpsCallableResult httpsCallableResult) {
                 Gson gson= new Gson();

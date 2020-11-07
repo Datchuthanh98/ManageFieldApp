@@ -5,31 +5,45 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.managefield.databinding.FragmentUpdateScoreBinding;
+import com.example.managefield.databinding.FragmentUpdateTimeBinding;
+import com.example.managefield.model.TimeGame;
+import com.example.managefield.viewModel.ListTimeViewModel;
 import com.example.managefield.viewModel.UpdateScoreViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class FragmentUpdateScore extends BottomSheetDialogFragment {
+public class FragmentUpdateTime extends BottomSheetDialogFragment {
 
-     private FragmentUpdateScoreBinding binding;
-     private UpdateScoreViewModel viewModel;
-     private  String idMatch;
-     public FragmentUpdateScore(String idMatch ) {
-        this.idMatch = idMatch;
+     private FragmentUpdateTimeBinding binding;
+     private ListTimeViewModel viewModel;
+     private  TimeGame timeGame;
+     public FragmentUpdateTime(TimeGame timeGame ) {
+        this.timeGame = timeGame;
+
+
+
+    }
+
+    private void setDefaultValute(TimeGame timeGame) {
+        binding.txtStartTime.setText(timeGame.getStartTime());
+        binding.txtEndTime.setText(timeGame.getEndTime());
+        binding.txtCost.setText(timeGame.getCost());
+        binding.txtPosition.setText(timeGame.getPosition());
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentUpdateScoreBinding.inflate(inflater);
+        binding = FragmentUpdateTimeBinding.inflate(inflater);
         binding.setLifecycleOwner(this);
         return binding.getRoot();
 
@@ -37,9 +51,10 @@ public class FragmentUpdateScore extends BottomSheetDialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(getActivity()).get(UpdateScoreViewModel.class);
+        viewModel = new ViewModelProvider(getActivity()).get(ListTimeViewModel.class);
         super.onViewCreated(view, savedInstanceState);
         initComponent(view.getContext());
+        setDefaultValute(this.timeGame);
 
     }
 
@@ -48,7 +63,7 @@ public class FragmentUpdateScore extends BottomSheetDialogFragment {
          binding.btnSave.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 viewModel.setScoreList(getScoreData());
+                 viewModel.updateTime(getScoreData());
                  detack();
              }
          });
@@ -62,10 +77,12 @@ public class FragmentUpdateScore extends BottomSheetDialogFragment {
 
     private Map<String, Object> getScoreData() {
          HashMap<String,Object> data = new HashMap<>();
-        data.put("scoreHome", Integer.parseInt(binding.txtScoreTeamHome.getText().toString()));
-        data.put("scoreAway", Integer.parseInt(binding.txtScoreTeamAway.getText().toString()));
-        data.put("active", true);
-        data.put("id",idMatch);
+        data.put("startTime", binding.txtStartTime.getText().toString());
+        data.put("endTime", binding.txtEndTime.getText().toString());
+        data.put("cost", binding.txtCost.getText().toString());
+        data.put("position", binding.txtPosition.getText().toString());
+        data.put("idField", timeGame.getIdField());
+        data.put("id",timeGame.getId());
         return data;
     }
 

@@ -1,9 +1,8 @@
-package com.example.managefield.viewModel;
+package com.example.managefield.Session;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.managefield.data.enumeration.DataState;
-import com.example.managefield.data.enumeration.Result;
 
 public class SessionStateData {
       private MutableLiveData<DataState> datalistMatch = new MutableLiveData<>(DataState.NOW);

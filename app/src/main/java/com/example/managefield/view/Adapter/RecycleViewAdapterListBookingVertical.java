@@ -1,5 +1,6 @@
 package com.example.managefield.view.Adapter;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.managefield.databinding.ItemBookingVerticalBinding;
 import com.example.managefield.model.Booking;
 import com.example.managefield.viewModel.ListBookingViewModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 //import com.example.managefield.view.Fragment.FragmentMainProfileMatch;
 
 import java.util.ArrayList;
@@ -21,6 +27,9 @@ public class RecycleViewAdapterListBookingVertical extends RecyclerView.Adapter<
     private FragmentManager fm;
     private List<Booking> bookingList = new ArrayList<>();
     private ListBookingViewModel listBookingViewModel;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageRef = storage.getReference();
+
     public RecycleViewAdapterListBookingVertical() {
     }
 
@@ -79,6 +88,42 @@ public class RecycleViewAdapterListBookingVertical extends RecyclerView.Adapter<
                 listBookingViewModel.declineBooking(bookingList.get(position).getId());
             }
         });
+
+
+        if(bookingList.get(position).getIdTeamHome().getUrlAvatar() !=null) {
+            storageRef.child(bookingList.get(position).getIdTeamHome().getUrlAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    if (uri != null) {
+                        Picasso.get().load(uri).into(holder.binding.avatarHome);
+                    }
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+
+                }
+            });
+        }
+//
+//        if(bookingList.get(position).getIdTeamAway().getUrlAvatar() !=null) {
+//            storageRef.child(bookingList.get(position).getIdTeamAway().getUrlAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//                    if (uri != null) {
+//                        Picasso.get().load(uri).into(holder.binding.avatarAway);
+//                    }
+//
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception exception) {
+//
+//                }
+//            });
+//        }
+
 
         holder.binding.setBooking(bookingList.get(position));
     }

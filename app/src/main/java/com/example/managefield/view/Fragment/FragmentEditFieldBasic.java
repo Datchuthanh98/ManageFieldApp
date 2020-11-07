@@ -1,12 +1,10 @@
 package com.example.managefield.view.Fragment;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,21 +15,16 @@ import androidx.lifecycle.Observer;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.databinding.FragmentEditPlayerBasicBinding;
 
-import com.example.managefield.databinding.LoadingLayoutBinding;
 import com.example.managefield.model.Field;
-import com.example.managefield.viewModel.SessionField;
+import com.example.managefield.Session.SessionField;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class FragmentEditFieldBasic extends BottomSheetDialogFragment {
-
-
      private  FragmentEditPlayerBasicBinding binding;
     private SessionField session = SessionField.getInstance();
-    private Dialog loadingDialog;
-    private LoadingLayoutBinding loadingLayoutBinding;
     private    Map<String, Object> data = new HashMap<>();
     @Nullable
     @Override
@@ -62,21 +55,11 @@ public class FragmentEditFieldBasic extends BottomSheetDialogFragment {
         binding.imageBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initLoadingDialog(context);
-                loadingDialog.show();
                 session.updateProfile(getUpdateBasic());
             }
         });
     }
 
-    private void initLoadingDialog(Context context) {
-        loadingDialog = new Dialog(context);
-        loadingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        loadingLayoutBinding = LoadingLayoutBinding.inflate(getLayoutInflater());
-        loadingDialog.setContentView(loadingLayoutBinding.getRoot());
-//        loadingLayoutBinding.title.setText(R.string.updating_information);
-        loadingDialog.setCancelable(false);
-    }
 
     private void observeLiveData(final Context context) {
         session.getResultLiveData().observe(getViewLifecycleOwner(), new Observer<Result>() {
@@ -85,14 +68,12 @@ public class FragmentEditFieldBasic extends BottomSheetDialogFragment {
                 if (result == null) return;
                 if (result == Result.SUCCESS) {
                     session.resetResult();
-                    loadingDialog.dismiss();
                     detach();
                     Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
                     updateUIPlayer();
 
                 } else if (result == Result.FAILURE) {
                     session.resetResult();
-                    loadingDialog.dismiss();
                     detach();
                     Toast.makeText(context, session.getResultMessage(), Toast.LENGTH_SHORT).show();
                 }

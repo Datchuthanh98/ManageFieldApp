@@ -7,22 +7,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.managefield.databinding.FragmentAddTimeBinding;
-import com.example.managefield.viewModel.ListMatchViewModel;
 import com.example.managefield.viewModel.ListTimeViewModel;
-import com.example.managefield.data.enumeration.Result;
-import com.example.managefield.databinding.LoadingLayoutBinding;
-import com.example.managefield.viewModel.SessionField;
-import com.example.managefield.viewModel.SessionStateData;
+import com.example.managefield.Session.SessionField;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,19 +1,17 @@
 package com.example.managefield.viewModel;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.managefield.Interface.CallBack;
+import com.example.managefield.Session.SessionField;
+import com.example.managefield.Session.SessionStateData;
 import com.example.managefield.data.enumeration.DataState;
-import com.example.managefield.data.enumeration.Result;
-import com.example.managefield.data.repository.MatchRepository;
 import com.example.managefield.data.repository.TimeGameRepository;
-import com.example.managefield.model.Booking;
 import com.example.managefield.model.TimeGame;
-import com.example.managefield.view.Adapter.RecycleViewAdapterListBookingVertical;
 import com.example.managefield.view.Adapter.RecycleViewAdapterListTimeVertical;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +24,6 @@ public class ListTimeViewModel extends ViewModel{
 
     public ListTimeViewModel(){
         getListTime();
-        adapterListTime.setListTimeViewModel(this);
     }
 
     public void  getListTime(){
@@ -60,6 +57,20 @@ public class ListTimeViewModel extends ViewModel{
 
             @Override
             public void onFailure(String message) {
+
+            }
+        });
+    }
+
+    public void updateTime(Map<String , Object> map){
+        timeGameRepository.updateTime(map, new CallBack<String, String>() {
+            @Override
+            public void onSuccess(String s) {
+                getListTime();
+            }
+
+            @Override
+            public void onFailure(String s) {
 
             }
         });

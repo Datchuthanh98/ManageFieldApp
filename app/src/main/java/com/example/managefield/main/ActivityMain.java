@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 public class ActivityMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_main_field);
+        setContentView(R.layout.activity_home);
         super.onCreate(savedInstanceState);
         TabLayout tabLayout = findViewById(R.id.tablayout);
         ViewPager viewPager = findViewById(R.id.viewpager);
@@ -22,10 +22,10 @@ public class ActivityMain extends AppCompatActivity {
         AdapterFragmentField adapter = new AdapterFragmentField(manager, AdapterFragmentField.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_account_circle_black_24dp);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_account_circle_black_24dp);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_account_circle_black_24dp);
-        tabLayout.getTabAt(3).setIcon(R.drawable.ic_account_circle_black_24dp);
+        tabLayout.getTabAt(0).setIcon(R.drawable.tab_match);
+        tabLayout.getTabAt(1).setIcon(R.drawable.booking);
+        tabLayout.getTabAt(2).setIcon(R.drawable.time_tab_icon);
+        tabLayout.getTabAt(3).setIcon(R.drawable.field_24);
 
     }
 

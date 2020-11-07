@@ -25,7 +25,7 @@ import com.example.managefield.R;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.databinding.FragmentEditMainPlayerBinding;
 import com.example.managefield.databinding.LoadingLayoutBinding;
-import com.example.managefield.viewModel.SessionField;
+import com.example.managefield.Session.SessionField;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
