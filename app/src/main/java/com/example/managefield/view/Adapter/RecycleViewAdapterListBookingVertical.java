@@ -77,7 +77,7 @@ public class RecycleViewAdapterListBookingVertical extends RecyclerView.Adapter<
         holder.binding.btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listBookingViewModel.acceptBooking(bookingList.get(position).getId());
+                listBookingViewModel.acceptBooking(bookingList.get(position));
             }
         });
 
@@ -85,7 +85,7 @@ public class RecycleViewAdapterListBookingVertical extends RecyclerView.Adapter<
         holder.binding.btnDecline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listBookingViewModel.declineBooking(bookingList.get(position).getId());
+                listBookingViewModel.declineBooking(bookingList.get(position));
             }
         });
 

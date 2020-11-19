@@ -41,11 +41,11 @@ public class MatchDataSource {
             public void onSuccess(HttpsCallableResult httpsCallableResult) {
                 Gson gson= new Gson();
                 List<Map> listTeamMaps = (List<Map>) httpsCallableResult.getData();
-                Log.d("match", "Success: "+listTeamMaps.size());
                 List<Booking> listBooking = new ArrayList<>();
                 if(listTeamMaps == null){
                     loadListBookingCallBack.onSuccess(null);
                 }else{
+
                     for (Map teamMap : listTeamMaps){
                         Booking booking = gson.fromJson(gson.toJson(teamMap), Booking.class);
                         listBooking.add(booking);
@@ -56,80 +56,75 @@ public class MatchDataSource {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("match", "failure: "+e.getMessage());
+                loadListBookingCallBack.onFailure("");
             }
         });
     }
 
 
-    public void loadListMatch(final CallBack<List<Match>,String> loadListMatchCallBack) {
-        functions.getHttpsCallable("getAllListMatch").call().addOnSuccessListener(new OnSuccessListener<HttpsCallableResult>() {
+    public void loadListMatch(String idField ,final CallBack<List<Match>,String> loadListMatchCallBack) {
+        functions.getHttpsCallable("getListMatchByField").call(idField).addOnSuccessListener(new OnSuccessListener<HttpsCallableResult>() {
             @Override
             public void onSuccess(HttpsCallableResult httpsCallableResult) {
                 Gson gson= new Gson();
                 List<Map> listTeamMaps = (List<Map>) httpsCallableResult.getData();
-                List<Match> listMatch = new ArrayList<>();
+                List<Match> listBooking = new ArrayList<>();
                 if(listTeamMaps == null){
                     loadListMatchCallBack.onSuccess(null);
                 }else{
+
                     for (Map teamMap : listTeamMaps){
-                        Match match = gson.fromJson(gson.toJson(teamMap), Match.class);
-                        listMatch.add(match);
+                        Match booking = gson.fromJson(gson.toJson(teamMap), Match.class);
+                        listBooking.add(booking);
                     }
-                    loadListMatchCallBack.onSuccess(listMatch);
+                    loadListMatchCallBack.onSuccess(listBooking);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                loadListMatchCallBack.onFailure(e.getMessage());
+                loadListMatchCallBack.onFailure("");
             }
         });
 
     }
 
 
-    public void acceptBooking(final String idBooking, final CallBack<String,String> acceptBooking) {
-        DocumentReference ref = db.collection("Match").document();
+    public void acceptBooking(final Booking booking, final CallBack<String,String> acceptBooking) {
         Map<String, Object> map = new HashMap<>();
-        map.put("id", ref.getId());
-        map.put("idBooking", idBooking);
-        map.put("scoreHome", null);
-        map.put("scoreAway", null);
-        map.put("active", false);
-        ref.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+        map.put("idBooking", booking.getId());
+        map.put("idTeamHome",booking.getIdTeamHome().getId());
+        map.put("idField",booking.getIdField().getId());
+        map.put("date",booking.getDate());
+        functions.getHttpsCallable("createMatch").call(map).addOnSuccessListener(new OnSuccessListener<HttpsCallableResult>() {
             @Override
-            public void onSuccess(Void aVoid) {
-                db.collection("Booking").document(idBooking).update("approve", true).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        acceptBooking.onSuccess("");
-                    }
-                });
+            public void onSuccess(HttpsCallableResult httpsCallableResult) {
+                acceptBooking.onSuccess("");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                Log.d("addbooking", "onFailure: "+e.getMessage());
                 acceptBooking.onFailure(e.getMessage());
             }
         });
 
     }
 
-    public void declineBooking(String idBooking, final CallBack declineBooking) {
+    public void declineBooking(Booking booking, final CallBack declineBooking) {
 
-        db.collection("Booking").document(idBooking).update("approve", true).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                declineBooking.onSuccess("");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                declineBooking.onSuccess(e.getMessage());
-
-            }
-        });
+//        db.collection("Booking").document(idBooking).update("approve", true).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                declineBooking.onSuccess("");
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                declineBooking.onSuccess(e.getMessage());
+//
+//            }
+//        });
     }
 
     public void updateScoreMatch(Map<String,Object>map , final  CallBack<String,String> callBack){

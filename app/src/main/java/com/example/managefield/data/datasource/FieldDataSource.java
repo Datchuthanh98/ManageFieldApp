@@ -124,37 +124,4 @@ public class FieldDataSource {
         StorageReference fileRef = storage.getReference().child(url);
         return fileRef.getFile(downloadLocation);
     }
-
-
-
-
-    public void loadListBookingRequest(String idTeam , final  CallBack<List<Field>,String> loadListPlayerRequestCallBack) {
-        db.collection("Booking").whereEqualTo("idTeam", idTeam).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                List<String> listIdPlayer = new ArrayList<>();
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
-                        String idteam = (String) document.get("idPlayer");
-                        listIdPlayer.add(idteam);
-                    }
-                    db.collection("Player").whereIn("id",listIdPlayer).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                        @Override
-                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                            List<Field> listPlayers = new ArrayList<>();
-                            if (!queryDocumentSnapshots.isEmpty()) {
-                                for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
-                                    Field field = document.toObject(Field.class);
-                                    listPlayers.add(field);
-                                }
-                                loadListPlayerRequestCallBack.onSuccess(listPlayers);
-                            } else {
-                                loadListPlayerRequestCallBack.onFailure("Null");
-                            }
-                        }
-                    });
-                }
-            }
-        });
-    }
 }

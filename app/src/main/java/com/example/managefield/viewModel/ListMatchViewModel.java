@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.managefield.Interface.CallBack;
+import com.example.managefield.Session.SessionField;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.data.repository.MatchRepository;
 import com.example.managefield.model.Booking;
@@ -26,18 +27,22 @@ public class ListMatchViewModel extends ViewModel{
 
     public ListMatchViewModel(){
         getListMatch();
-
+        Log.d("match", "ListMatc 0");
     }
 
     public void  getListMatch(){
-        matchRepository.getListMatch(new CallBack<List<Match>, String>() {
+        Log.d("match", "ListMatc 0");
+        matchRepository.getListMatch(SessionField.getInstance().getFiledLiveData().getValue().getId(),new CallBack<List<Match>, String>() {
             @Override
             public void onSuccess(List<Match> matchList) {
+                Log.d("match", "ListMatc 1");
                 if(matchList == null){
+                    Log.d("match", "ListMatc 2");
                     listBookingFieldLiveData.setValue(new ArrayList<Match>());
                     adapterListMatchVertical.setListMatch(new ArrayList<Match>());
                     adapterListMatchVertical.notifyDataSetChanged();
                 }else{
+                    Log.d("match", "ListMatc 3");
                     listBookingFieldLiveData.setValue(matchList);
                     adapterListMatchVertical.setListMatch(matchList);
                     adapterListMatchVertical.notifyDataSetChanged();

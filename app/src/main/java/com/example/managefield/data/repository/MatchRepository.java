@@ -28,16 +28,16 @@ public class MatchRepository {
         matchDataSource.loadListBooking(idField,loadListBookingCallBack);
     }
 
-    public void getListMatch(CallBack<List<Match>,String> loadListMatchCallBack){
-        matchDataSource.loadListMatch(loadListMatchCallBack);
+    public void getListMatch(String idField,CallBack<List<Match>,String> loadListMatchCallBack){
+        matchDataSource.loadListMatch(idField,loadListMatchCallBack);
     }
 
-    public  void acceptBooking(String id, CallBack<String,String> acceptBooking){
-         matchDataSource.acceptBooking(id,acceptBooking);
+    public  void acceptBooking(Booking booking, CallBack<String,String> acceptBooking){
+         matchDataSource.acceptBooking(booking,acceptBooking);
     }
 
-    public  void declineBooking(String  id, CallBack<String,String> declineBooking){
-        matchDataSource.declineBooking(id, declineBooking);
+    public  void declineBooking(Booking booking, CallBack<String,String> declineBooking){
+        matchDataSource.declineBooking(booking, declineBooking);
     }
 
     public void updateScoreMatch(Map<String,Object> map ,CallBack<String,String> updateScore){

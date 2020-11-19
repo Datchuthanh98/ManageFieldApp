@@ -1,5 +1,7 @@
 package com.example.managefield.data.datasource;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.managefield.Interface.CallBack;
@@ -48,10 +50,11 @@ public class TimeDataSource {
     }
 
     public void loadListTime(String idTeam,final CallBack<List<TimeGame>,String> loadListTimeCallBack) {
-        db.collection("TimeGame").whereEqualTo("idField", idTeam).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("Field").document(idTeam).collection("listTimeGame").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 final List<TimeGame> listTimeGame = new ArrayList<>();
+                Log.d(TAG, "size: "+listTimeGame.size());
                 if (!queryDocumentSnapshots.isEmpty()) {
                     for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
                         TimeGame timeGame = document.toObject(TimeGame.class);
@@ -70,8 +73,8 @@ public class TimeDataSource {
         });
     }
 
-    public void createTeam(Map<String, Object> map,final CallBack<String, String> createTime) {
-        DocumentReference ref = db.collection("TimeGame").document();
+    public void createTeam(String idField,Map<String, Object> map,final CallBack<String, String> createTime) {
+        DocumentReference ref = db.collection("Field").document(idField).collection("listTimeGame").document();
         map.put("id", ref.getId());
         ref.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

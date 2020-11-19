@@ -30,8 +30,8 @@ public class TimeGameRepository {
         timeDataSource.loadListTime(idTeam,loadListBookingCallBack);
     }
 
-    public void creatTeam(Map<String,Object> map, CallBack<String ,String> checkteam) {
-        timeDataSource.createTeam(map,checkteam);
+    public void creatTeam(String idTeam,Map<String,Object> map, CallBack<String ,String> checkteam) {
+        timeDataSource.createTeam( idTeam,map,checkteam);
     }
 
     public void updateTime(Map<String,Object> map, CallBack<String ,String> checkteam) {

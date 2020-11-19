@@ -28,7 +28,6 @@ public class FragmentListBooking extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentListBookingBinding.inflate(inflater);
         return binding.getRoot();
-
     }
 
     @Override

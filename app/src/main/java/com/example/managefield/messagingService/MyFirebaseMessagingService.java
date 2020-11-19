@@ -33,7 +33,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onNewToken(String token) {
         sendRegistrationTokenToServer(token);
     }
-
     private void sendRegistrationTokenToServer(String token) {
         Map<String, Object> updateProfileMap = new HashMap<>();
         updateProfileMap.put("registrationToken", token);
@@ -70,17 +69,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationChannel.enableLights(true);
             notificationManager.createNotificationChannel(notificationChannel);
         }
-
         if (messageType!=null && messageType.equals("NewBooking")){
             String idTeam = data.get("playerId");
             String nameTeam = data.get("playerName");
              contentText = nameTeam + " just sent a join request";
 
         }
-
         //send notification
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
             notificationBuilder.setAutoCancel(true)
                     .setDefaults(Notification.DEFAULT_ALL)
@@ -89,7 +85,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setContentTitle(messageType)
                     .setContentText(contentText)
                     .setContentInfo("Info");
-
             notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
         }
     }

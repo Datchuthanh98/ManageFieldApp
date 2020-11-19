@@ -48,8 +48,8 @@ public class ListBookingViewModel extends ViewModel{
         });
     }
 
-    public  void acceptBooking(String id) {
-        matchRepository.acceptBooking(id, new CallBack<String, String>() {
+    public  void acceptBooking(Booking booking) {
+        matchRepository.acceptBooking(booking, new CallBack<String, String>() {
             @Override
             public void onSuccess(String s) {
                 SessionStateData.getInstance().setDatalistBooking(DataState.NEW);
@@ -65,8 +65,8 @@ public class ListBookingViewModel extends ViewModel{
         });
     }
 
-    public  void declineBooking(String  id){
-        matchRepository.declineBooking(id, new CallBack<String, String>() {
+    public  void declineBooking(Booking booking){
+        matchRepository.declineBooking(booking, new CallBack<String, String>() {
             @Override
             public void onSuccess(String s) {
                 SessionStateData.getInstance().setDatalistBooking(DataState.NEW);

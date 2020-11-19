@@ -83,7 +83,7 @@ public class SessionField implements FieldChangeCallBack {
 
         filedLiveData.setValue(field);
         if (field != null) {
-            if (!field.getUrlAvatar().isEmpty()) {
+            if (field.getUrlAvatar() != null) {
                 String[] files = field.getUrlAvatar().split("/");
                 String fileName = files[files.length-1];
                 File photo = new File(getApplicationContext().getCacheDir(), fileName);
@@ -105,7 +105,7 @@ public class SessionField implements FieldChangeCallBack {
                 }
             }
 
-            if (!field.getUrlCover().isEmpty()) {
+            if (field.getUrlCover() != null) {
                 String[] files = field.getUrlCover().split("/");
                 String fileName = files[files.length-1];
                 File photo = new File(getApplicationContext().getCacheDir(), fileName);

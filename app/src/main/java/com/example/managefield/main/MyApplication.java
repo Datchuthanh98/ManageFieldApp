@@ -13,7 +13,6 @@ public class MyApplication extends Application {
         //init Firebase for app
         SessionField.getInstance().setApplication(this);
         FirebaseApp.initializeApp(this);
-
     }
 
 

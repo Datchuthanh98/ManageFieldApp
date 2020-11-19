@@ -49,7 +49,7 @@ public class ListTimeViewModel extends ViewModel{
     }
 
     public void createTeam(Map<String,Object> data){
-        timeGameRepository.creatTeam(data, new CallBack<String, String>() {
+        timeGameRepository.creatTeam(SessionField.getInstance().getFiledLiveData().getValue().getId(),data, new CallBack<String, String>() {
             @Override
             public void onSuccess(String s) {
             SessionStateData.getInstance().setDatalistTime(DataState.NEW);

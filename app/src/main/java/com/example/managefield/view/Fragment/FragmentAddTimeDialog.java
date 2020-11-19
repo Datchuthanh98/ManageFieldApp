@@ -63,7 +63,6 @@ public class FragmentAddTimeDialog extends DialogFragment {
 
 
     private Map<String, Object> dataTeam() {
-        data.put("idField", SessionField.getInstance().getPlayerLiveData().getValue().getId());
         data.put("startTime", binding.txtStartTime.getText().toString());
         data.put("endTime", binding.txtEndTime.getText().toString());
         data.put("position", binding.txtEndTime.getText().toString());
