@@ -22,6 +22,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.managefield.R.drawable.avatar_team_default;
+
 
 public class RecycleViewAdapterListBookingVertical extends RecyclerView.Adapter<RecycleViewAdapterListBookingVertical.MyViewHolder> {
     private FragmentManager fm;
@@ -90,12 +92,12 @@ public class RecycleViewAdapterListBookingVertical extends RecyclerView.Adapter<
         });
 
 
-        if(bookingList.get(position).getIdTeamHome().getUrlAvatar() !=null) {
+        if(bookingList.get(position).getIdTeamHome() !=null) {
             storageRef.child(bookingList.get(position).getIdTeamHome().getUrlAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     if (uri != null) {
-                        Picasso.get().load(uri).into(holder.binding.avatarHome);
+                        Picasso.get().load(uri).fit().centerCrop().into(holder.binding.avatarHome);
                     }
 
                 }
@@ -106,23 +108,24 @@ public class RecycleViewAdapterListBookingVertical extends RecyclerView.Adapter<
                 }
             });
         }
-//
-//        if(bookingList.get(position).getIdTeamAway().getUrlAvatar() !=null) {
-//            storageRef.child(bookingList.get(position).getIdTeamAway().getUrlAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                @Override
-//                public void onSuccess(Uri uri) {
-//                    if (uri != null) {
-//                        Picasso.get().load(uri).into(holder.binding.avatarAway);
-//                    }
-//
-//                }
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception exception) {
-//
-//                }
-//            });
-//        }
+
+        if(bookingList.get(position).getIdTeamAway() !=null) {
+            holder.binding.avatarAway.setImageResource(avatar_team_default);
+            storageRef.child(bookingList.get(position).getIdTeamAway().getUrlAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    if (uri != null) {
+                        Picasso.get().load(uri).fit().centerCrop().into(holder.binding.avatarAway);
+                    }
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+
+                }
+            });
+        }
 
 
         holder.binding.setBooking(bookingList.get(position));

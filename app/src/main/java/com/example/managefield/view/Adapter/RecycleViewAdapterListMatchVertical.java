@@ -1,6 +1,7 @@
 package com.example.managefield.view.Adapter;
 
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.managefield.R;
 import com.example.managefield.databinding.ItemBookingVerticalBinding;
 import com.example.managefield.databinding.ItemMatchVerticalBinding;
 import com.example.managefield.main.ActivityMain;
@@ -28,6 +30,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.managefield.R.drawable.avatar_team;
+import static com.example.managefield.R.drawable.avatar_team_default;
 
 //import com.example.managefield.view.Fragment.FragmentMainProfileMatch;
 
@@ -84,39 +89,42 @@ public class RecycleViewAdapterListMatchVertical extends RecyclerView.Adapter<Re
         });
 
 
-//
-//        if(matches.get(position).getIdBooking().getIdTeamHome().getUrlAvatar() !=null) {
-//            storageRef.child(matches.get(position).getIdBooking().getIdTeamHome().getUrlAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                @Override
-//                public void onSuccess(Uri uri) {
-//                    if (uri != null) {
-//                        Picasso.get().load(uri).into(holder.binding.avatarHome);
-//                    }
-//
-//                }
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception exception) {
-//
-//                }
-//            });
-//        }
-//
-//        if(matches.get(position).getIdBooking().getIdTeamAway().getUrlAvatar() !=null) {
-//            storageRef.child(matches.get(position).getIdBooking().getIdTeamAway().getUrlAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                @Override
-//                public void onSuccess(Uri uri) {
-//                    if (uri != null) {
-//                        Picasso.get().load(uri).into(holder.binding.avatarAway);
-//                    }
-//                }
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception exception) {
-//
-//                }
-//            });
-//        }
+
+        if(matches.get(position).getIdBooking().getIdTeamHome().getUrlAvatar() !=null) {
+            storageRef.child(matches.get(position).getIdBooking().getIdTeamHome().getUrlAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    if (uri != null) {
+                        Picasso.get().load(uri).fit().centerCrop().into(holder.binding.avatarHome);
+                    }
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+
+                }
+            });
+        }
+
+
+
+        if(matches.get(position).getIdBooking().getIdTeamAway() != null) {
+            holder.binding.avatarAway.setImageResource(avatar_team_default);
+            storageRef.child(matches.get(position).getIdBooking().getIdTeamAway().getUrlAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    if (uri != null) {
+                            Picasso.get().load(uri).fit().centerCrop().into(holder.binding.avatarAway);
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+
+                }
+            });
+        }
         
         holder.binding.setMatch(matches.get(position));
     }
