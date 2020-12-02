@@ -16,7 +16,6 @@
         android:layout_height="match_parent">
 
     <LinearLayout
-        android:background="#d1e0e0"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
