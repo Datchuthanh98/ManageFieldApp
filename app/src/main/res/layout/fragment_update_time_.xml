@@ -24,7 +24,7 @@
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Update time "
+                    android:text="Chỉnh sửa khung giờ "
                     android:gravity="center_vertical"
                     android:textSize="20dp"
                     android:layout_weight="1"/>

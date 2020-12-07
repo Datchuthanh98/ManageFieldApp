@@ -4,11 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <import type="com.example.managefield.Session.SessionField"></import>
     </data>
     <LinearLayout
+        android:background="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -23,17 +24,11 @@
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Create Team"
+                    android:text="Thêm khung giờ "
                     android:gravity="center_vertical"
                     android:textSize="20dp"
                     android:layout_weight="1"/>
-                <ImageButton
-                    android:id="@+id/btnReset"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingHorizontal="15dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_baseline_replay_white_24"/>
+
                 <ImageButton
                     android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
@@ -52,51 +47,53 @@
             android:layout_width="match_parent"
             >
             <TextView
-
-                android:drawableStart="@drawable/ic_baseline_account_box_24_blue"
-                android:text=" Start Time"
+                android:drawableStart="@drawable/time_icon"
+                android:text=" Start time"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
+                android:text="0"
                 android:id="@+id/txtStartTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
-                android:drawableStart="@drawable/ic_baseline_phone_24_green"
-                android:text=" EndTime"
+                android:drawableStart="@drawable/time_icon"
+                android:text=" End Time"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
+                android:text="0"
                 android:id="@+id/txtEndTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
-                android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
-                android:text=" Sân số"
+                android:drawableStart="@drawable/money"
+                android:text=" Cost"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText
-                android:id="@+id/txtNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></EditText>
-            <TextView
-                android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
-                android:text=" Phí sân"
-                android:textStyle="bold"
-                android:textSize="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></TextView>
-            <EditText
+                android:text="0"
                 android:id="@+id/txtCost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
-
+            <TextView
+                android:drawableStart="@drawable/field_24"
+                android:text=" Position Field"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <EditText
+                android:text="0"
+                android:id="@+id/txtPosition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
         </LinearLayout>
     </LinearLayout>
 </layout>

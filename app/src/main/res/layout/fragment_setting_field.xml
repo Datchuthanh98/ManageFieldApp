@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/toolbar_color"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Chức năng cá nhân"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+            <TextView
+                style="@style/viewParent.headerText.settingsMiniTitle"
+                android:text="Thông tin cá nhân" />
+
+            <TextView
+                android:id="@+id/btnEditAvatar"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:drawableLeft="@drawable/ic_edit_profile"
+                android:text="Đổi avatar " />
+
+            <TextView
+                android:id="@+id/btnEditCover"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:drawableLeft="@drawable/ic_edit_profile"
+                android:text="Đổi ảnh bìa" />
+
+
+
+            <TextView
+                android:id="@+id/btnEditBasic"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:drawableLeft="@drawable/ic_dark_mode"
+                android:layout_marginTop="10dp"
+                android:text="Đổi thông tin cơ bản" />
+            <TextView
+                android:id="@+id/btnEditPlayer"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:drawableLeft="@drawable/ic_edit_password"
+                android:text="Đổi thông tin thi đấu" />
+
+
+            <TextView
+                android:id="@+id/btnEditIntroduce"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:drawableLeft="@drawable/ic_languages"
+                android:text="Cập nhập lời giới thiệu" />
+
+            <TextView
+                android:id="@+id/changepass"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:drawableLeft="@drawable/iconpassword"
+                android:layout_marginTop="10dp"
+                android:text="Đổi mật khẩu" />
+            <TextView
+                style="@style/viewParent.headerText.settingsMiniTitle"
+                android:text="Tiếng Anh" />
+
+            <TextView
+                android:id="@+id/choose_langage"
+
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:drawableLeft="@drawable/language"
+                android:text="Tiếng việt"
+                />
+
+            <TextView
+                style="@style/viewParent.headerText.settingsMiniTitle"
+                android:text="Hoạt động" />
+
+
+
+            <TextView
+                android:id="@+id/btnLogout"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:drawableLeft="@drawable/ic_logout"
+                android:text="Đăng xuât" />
+
+
+            <TextView
+                android:layout_marginTop="100dp"
+                style="@style/viewParent.headerText.settingsMiniTitle"
+                android:text="App ver 2.0 by Dat Chu Thanh"
+                android:textAlignment="center"/>
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

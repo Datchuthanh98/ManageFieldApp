@@ -1,106 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
  <data>
-  <import type="android.view.View" />
-
  </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/login_background"
-    >
-
  <androidx.constraintlayout.widget.ConstraintLayout
-     app:layout_constraintTop_toTopOf="parent"
-     app:layout_constraintBottom_toBottomOf="parent"
      android:layout_width="match_parent"
-     android:layout_height="wrap_content">
+     android:layout_height="match_parent">
 
   <ImageView
-      android:id="@+id/logoApp"
+      android:id="@+id/logo"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintRight_toRightOf="parent"
-      android:layout_width="150dp"
-      android:layout_height="150dp"
-      android:src="@drawable/avatar_team" />
+      app:layout_constraintBottom_toTopOf="@id/layoutLogin"
+      android:layout_width="200dp"
+      android:layout_height="200dp"
+      android:src="@drawable/icon_field" />
 
- <LinearLayout
-     android:id="@+id/loginBasic"
-     android:orientation="vertical"
-     app:layout_constraintTop_toBottomOf="@id/logoApp"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content">
-  <EditText
-      android:id="@+id/txtEmail"
-      android:layout_width="match_parent"
+  <RelativeLayout
+      android:id="@+id/layoutLogin"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/logo"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_margin="10dp"
-      android:padding="15dp"
-      android:background="#F0F8FF"
-      android:drawableLeft="@drawable/ic_account_circle_black_24dp"
-      android:drawablePadding="10dp"
-      android:hint="Email"
-      android:textColor="#0c0d0c"
-      android:textColorHint="#0c0d0c"
-      android:textColorHighlight="#FFFFFF"
-      android:text="field1@gmail.com"
+      >
+   <LinearLayout
+       android:id="@+id/ll"
+       android:layout_centerInParent="true"
+       android:layout_marginRight="30dp"
+       android:layout_marginLeft="30dp"
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/txtEmail"
+        android:paddingLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Email"
+        android:text="field1@gmail.com"
+        android:background="@drawable/shape2"
+        />
+
+    <EditText
+        android:text="123456"
+        android:id="@+id/txtPassword"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Mật khẩu"
+        android:background="@drawable/shape2"
+        />
+    <TextView
+        android:id="@+id/forgot"
+        android:textSize="16sp"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="right"
+        android:layout_alignParentBottom="true"
+        android:hint = "Quên mật khẩu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <Button
+        android:id="@+id/btnLoginEmail"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/shape"
+        android:text="Đăng nhập"
+        android:textAllCaps="false"
+        android:textColor="@color/white"></Button>
+   </LinearLayout>
+  </RelativeLayout>
+
+  <TextView
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:id="@+id/btnRegister"
+      android:textSize="16sp"
+      android:layout_marginBottom="30dp"
+      android:layout_centerInParent="true"
+      android:layout_alignParentBottom="true"
+      android:text = "Liên hệ đăng kí sân bóng"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
       />
-
-  <EditText
-      android:id="@+id/txtPassword"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_margin="10dp"
-      android:background="#F0F8FF"
-      android:drawableLeft="@drawable/ic_account_circle_black_24dp"
-      android:drawablePadding="10dp"
-      android:hint="Password"
-      android:inputType="textPassword"
-      android:padding="15dp"
-      android:text="123456"
-      android:textColor="#0c0d0c"
-      android:textColorHighlight="#FFFFFF"
-      android:textColorHint="#0c0d0c" />
-
- </LinearLayout>
-
-
- <LinearLayout
-     android:orientation="vertical"
-     app:layout_constraintTop_toBottomOf="@id/loginBasic"
-     app:layout_constraintLeft_toLeftOf="parent"
-     app:layout_constraintRight_toRightOf="parent"
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:gravity="center"
-     >
-  <Button
-      android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
-      android:layout_width="250dp"
-      android:layout_height="wrap_content"
-      android:text=" Login with Email"
-      android:id="@+id/btnLoginEmail"
-      android:shadowColor="@android:color/transparent"
-      android:padding="15dp"
-      android:layout_marginRight="10dp"
-      android:layout_marginLeft="10dp"
-      android:layout_marginBottom="10dp"
-      android:layout_marginTop="0dp"
-      android:textColor="#ffffff"
-      android:background="#071112"/>
-
-
-
-
-
- </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+ </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -22,21 +22,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import com.example.managefield.R;
+import com.example.managefield.auth.ActivityLogin;
 import com.example.managefield.data.enumeration.Result;
-import com.example.managefield.databinding.FragmentEditMainPlayerBinding;
+import com.example.managefield.databinding.FragmentSettingFieldBinding;
 import com.example.managefield.databinding.LoadingLayoutBinding;
 import com.example.managefield.Session.SessionField;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class FragmentEditMainField extends Fragment {
+public class FragmentSettingField extends Fragment {
     private Dialog loadingDialog;
     private LoadingLayoutBinding loadingLayoutBinding;
-    private FragmentEditMainPlayerBinding binding;
+    private FragmentSettingFieldBinding binding;
     public static final int RESULT_LOAD_IMG_AVATAR = 1012;
     public static final int RESULT_LOAD_IMG_COVER = 1013;
     private  String urlAvatar , urlCover;
@@ -45,7 +47,7 @@ public class FragmentEditMainField extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditMainPlayerBinding.inflate(inflater);
+        binding = FragmentSettingFieldBinding.inflate(inflater);
         binding.setLifecycleOwner(this);
         return binding.getRoot();
     }
@@ -54,7 +56,6 @@ public class FragmentEditMainField extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
          initComponent(view.getContext());
-        observeLiveData(view.getContext());
         initLoadingDialog(view.getContext());
     }
 
@@ -107,6 +108,17 @@ public class FragmentEditMainField extends Fragment {
                 dialog.show(getParentFragmentManager(), null);
             }
         });
+
+        binding.btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getContext(), ActivityLogin.class));
+                getActivity().finish();
+            }
+        });
+
+
     }
 
     private void detach(){
@@ -121,53 +133,7 @@ public class FragmentEditMainField extends Fragment {
         loadingDialog.setCancelable(false);
     }
 
-    private void observeLiveData(final Context context) {
-        //init Photo
-        SessionField.getInstance().getAvatarLiveData().observe(getViewLifecycleOwner(), new Observer<File>() {
-            @Override
-            public void onChanged(File file) {
-                Picasso.get().load(file).into(binding.avatar);
-            }
-        });
 
-        SessionField.getInstance().getCoverLiveData().observe(getViewLifecycleOwner(), new Observer<File>() {
-            @Override
-            public void onChanged(File file) {
-                Picasso.get().load(file).into(binding.cover);
-            }
-        });
-
-        //update Photo
-        session.getResultPhotoLiveData().observe(getViewLifecycleOwner(), new Observer<Result>() {
-            @Override
-            public void onChanged(Result result) {
-                if (result == null) return;
-                if (result == Result.SUCCESS) {
-                    Picasso.get().load(session.getAvatarLiveData().getValue()).into(binding.avatar);
-                    Picasso.get().load(session.getCoverLiveData().getValue()).into(binding.cover);
-
-                } else if (result == Result.FAILURE) {
-                    Toast.makeText(context, session.getResultMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-        session.getResultPhotoLiveData().observe(getViewLifecycleOwner(), new Observer<Result>() {
-            @Override
-            public void onChanged(Result result) {
-                if (result == null) return;
-                if (result == Result.SUCCESS) {
-                    loadingDialog.dismiss();
-                    Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
-
-                } else if (result == Result.FAILURE) {
-                    loadingDialog.dismiss();
-                    Toast.makeText(context, session.getResultMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
 
     @Override
@@ -186,11 +152,9 @@ public class FragmentEditMainField extends Fragment {
                 returnCursor.moveToFirst();
 
                 if(requestCode == RESULT_LOAD_IMG_AVATAR){
-                    binding.avatar.setImageBitmap(selectedImage);
                     urlAvatar = returnCursor.getString(nameIndex);
                     updateImage(imageUri,urlAvatar,true);
                 }else if(requestCode == RESULT_LOAD_IMG_COVER){
-                    binding.cover.setImageBitmap(selectedImage) ;
                     urlCover =  returnCursor.getString(nameIndex);
                     updateImage(imageUri,urlCover,false);
                 }

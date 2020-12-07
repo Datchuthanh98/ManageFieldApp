@@ -1,7 +1,6 @@
 package com.example.managefield.view.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
-import com.example.managefield.auth.ActivityLogin;
 import com.example.managefield.data.enumeration.Result;
 import com.example.managefield.databinding.FragmentProfileMyselfBinding;
 import com.example.managefield.main.ActivityMain;
 import com.example.managefield.Session.SessionField;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -43,16 +40,7 @@ public class FragmentProfileMyField extends Fragment {
             @Override
             public void onClick(View v) {
                 ActivityMain activityHome = (ActivityMain) getContext();
-                activityHome.addFragment(new FragmentEditMainField());
-            }
-        });
-
-        binding.btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getContext(), ActivityLogin.class));
-                getActivity().finish();
+                activityHome.addFragment(new FragmentSettingField());
             }
         });
 
