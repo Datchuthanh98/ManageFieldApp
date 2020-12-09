@@ -43,13 +43,13 @@ public class AdapterFragmentField extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position){
             case 0:
-                return "List Match";
+                return "Trận đấu";
             case 1:
-                return "List Request";
+                return "Đặt sân";
             case 2:
-                return "List Time";
+                return "Khung giờ";
             case 3:
-                return "List Profile";
+                return "Thông tin";
         }
         return null;
     }

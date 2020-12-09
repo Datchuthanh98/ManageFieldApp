@@ -16,7 +16,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/toolbar_color"
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent">
             <LinearLayout
@@ -27,7 +27,7 @@
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Edit information basic"
+                    android:text="Chỉnh sửa"
                     android:gravity="center_vertical"
                     android:textSize="20dp"
                     android:layout_weight="1"/>
@@ -55,10 +55,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:drawableStart="@drawable/ic_baseline_account_box_24_blue"
-                android:text=" Introduce"
+                android:drawableStart="@drawable/introduce_icon"
+                android:text=" Lời giới thiệu"
                 android:textStyle="bold"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <EditText

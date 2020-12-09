@@ -48,7 +48,7 @@
             >
             <TextView
                 android:drawableStart="@drawable/time_icon"
-                android:text=" Start time"
+                android:text=" Giờ bắt đầu "
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"></EditText>
             <TextView
                 android:drawableStart="@drawable/time_icon"
-                android:text=" End Time"
+                android:text=" Giờ kết thúc "
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"></EditText>
             <TextView
                 android:drawableStart="@drawable/money"
-                android:text=" Cost"
+                android:text=" Phí sân"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"></EditText>
             <TextView
                 android:drawableStart="@drawable/field_24"
-                android:text=" Position Field"
+                android:text=" Ô sân"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"

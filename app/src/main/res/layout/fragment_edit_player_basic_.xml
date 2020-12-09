@@ -13,7 +13,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/toolbar_color"
             android:layout_height="?attr/actionBarSize">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Edit information basic"
+                    android:text="Chỉnh sửa"
                     android:gravity="center_vertical"
                     android:textSize="20dp"
                     android:layout_weight="1"/>
@@ -52,8 +52,9 @@
             android:layout_width="match_parent"
             >
             <TextView
-                android:drawableStart="@drawable/ic_baseline_account_box_24_blue"
-                android:text=" Name Player"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/name_icon"
+                android:text=" Tên"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
@@ -64,8 +65,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
+                android:drawablePadding="10dp"
                 android:drawableStart="@drawable/ic_baseline_phone_24_green"
-                android:text=" Phone"
+                android:text=" Số điện thoại"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
@@ -76,7 +78,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
-                android:drawableStart="@drawable/ic_baseline_email_24_yeallow"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/email_icon"
                 android:text="Email"
                 android:textStyle="bold"
                 android:textSize="15dp"
@@ -88,8 +91,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <TextView
-                android:drawableStart="@drawable/ic_join_24"
-                android:text="Address"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/address_icon"
+                android:text="Địa chỉ"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
