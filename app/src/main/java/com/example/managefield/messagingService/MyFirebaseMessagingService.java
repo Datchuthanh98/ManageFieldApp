@@ -70,9 +70,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(notificationChannel);
         }
         if (messageType!=null && messageType.equals("NewBooking")){
-            String idTeam = data.get("playerId");
-            String nameTeam = data.get("playerName");
-             contentText = nameTeam + " just sent a join request";
+            String nameTeam = data.get("nameTeam");
+             contentText = "Đội " + nameTeam + " đã gửi yêu cầu đặt sân";
 
         }
         //send notification

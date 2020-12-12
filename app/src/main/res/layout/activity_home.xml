@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.tabs.TabLayout
+
         style="@style/MyTabLayout"
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
 <!--    adapter dau-->
 
     <androidx.viewpager.widget.ViewPager
+
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
