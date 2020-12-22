@@ -34,8 +34,12 @@ public class TimeGameRepository {
         timeDataSource.createTeam( idTeam,map,checkteam);
     }
 
-    public void updateTime(Map<String,Object> map, CallBack<String ,String> checkteam) {
-        timeDataSource.updateTime(map,checkteam);
+    public void updateTime(String idField,Map<String,Object> map, CallBack<String ,String> checkteam) {
+        timeDataSource.updateTime(idField,map,checkteam);
+    }
+
+    public void deleteTimeGame(String idField,Map<String,Object> map, CallBack<String ,String> checkteam) {
+        timeDataSource.deleteTime(idField,map,checkteam);
     }
 
 

@@ -80,12 +80,7 @@ public class RecycleViewAdapterListTimeVertical extends RecyclerView.Adapter<Rec
         });
 
 
-        holder.binding.btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
         holder.binding.setTimeGame(timeGameList.get(position));
     }

@@ -15,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contentPadding="10dp"
-        android:layout_margin="10dp"
         app:cardCornerRadius="10dp"
+        android:layout_margin="10dp"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,11 +40,10 @@
                     android:layout_height="wrap_content">
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/avatarHome"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/avatar_team_default"
-                        app:border_color="@color/white"
-                        app:border_width="5dp" />
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+ android:src="@drawable/avatar_team_default"
+                        />
                     <TextView
 
                         android:text="@{booking.idTeamHome.name}"
@@ -94,25 +93,26 @@
                     android:id="@+id/score2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                  />
+                    />
 
 
                 <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/score2"
-                    app:layout_constraintRight_toRightOf="parent"
                     android:id="@+id/club2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/score2"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/avatarAway"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/noteam"
-                        app:border_color="@color/white"
-                        app:border_width="5dp" />
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/noteam" />
+
                     <TextView
                         android:text="@{booking.idTeamAway.name}"
                         android:layout_width="wrap_content"
@@ -131,45 +131,47 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:layout_weight="1"
+                        android:id="@+id/txtTime"
                         android:drawablePadding="5dp"
-                        android:text="@{booking.date +`,`+booking.idTimeGame.startTime+ `-`+booking.idTimeGame.endTime}"
                         android:drawableStart="@drawable/time_icon"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"></TextView>
+                    <TextView
+                        android:id="@+id/txtField"
+                        android:layout_width="wrap_content"
+                        android:drawablePadding="5dp"
+                        android:drawableStart="@drawable/field_24"
+                        android:layout_height="wrap_content"></TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:paddingTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textAlignment="center"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:textColor="#33ccff"
+                        android:id="@+id/btnAccept"
+                         android:layout_marginHorizontal="50dp"
+                        android:drawablePadding="5dp"
+                        android:text="Đồng ý "
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"></TextView>
                     <TextView
-                    android:layout_weight="1"
-                    android:text="@{`ô số `+booking.idTimeGame.position}"
-                    android:drawableStart="@drawable/field_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></TextView>
+                        android:textAlignment="center"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:textColor="#ff4d4d"
+                        android:id="@+id/btnDecline"
+                        android:layout_marginHorizontal="50dp"
+                        android:drawablePadding="5dp"
+                        android:text="Từ chối"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></TextView>
                 </LinearLayout>
-      <LinearLayout
-          android:padding="10dp"
-          android:gravity="center"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-          <Button
-              android:layout_gravity="center"
-              android:paddingRight="20dp"
-              android:paddingLeft="20dp"
-              android:textColor="@color/white"
-              android:background="@drawable/buttonstyle"
-              android:id="@+id/btnAccept"
-              android:text="Accept"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"></Button>
-          <Button
-              android:layout_gravity="center"
-              android:paddingRight="20dp"
-              android:paddingLeft="20dp"
-              android:textColor="@color/white"
-              android:background="@drawable/buttonstyle"
-              android:id="@+id/btnDecline"
-              android:text="Decilne"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"></Button>
-      </LinearLayout>
 
             </LinearLayout>
 

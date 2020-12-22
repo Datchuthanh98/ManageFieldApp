@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.managefield.Interface.CallBack;
 import com.example.managefield.Session.SessionField;
+import com.example.managefield.data.enumeration.LoadingState;
 import com.example.managefield.data.enumeration.Result;
+import com.example.managefield.data.enumeration.Status;
 import com.example.managefield.data.repository.MatchRepository;
 import com.example.managefield.model.Booking;
 import com.example.managefield.model.Match;
@@ -24,25 +26,27 @@ public class ListMatchViewModel extends ViewModel{
     private RecycleViewAdapterListMatchVertical adapterListMatchVertical = new RecycleViewAdapterListMatchVertical();
     private MutableLiveData<List<Match>> listBookingFieldLiveData = new MutableLiveData<>();
     private MutableLiveData<Result> resultUpdateScore = new MutableLiveData<>();
+    private MutableLiveData<LoadingState> teamLoadState = new MutableLiveData<>(LoadingState.INIT);
+    private MutableLiveData<LoadingState> executeState = new MutableLiveData<>();
+    private MutableLiveData<Status> statusData = new MutableLiveData<>(Status.NO_DATA);
 
     public ListMatchViewModel(){
         getListMatch();
-        Log.d("match", "ListMatc 0");
     }
 
     public void  getListMatch(){
-        Log.d("match", "ListMatc 0");
+        teamLoadState.setValue(LoadingState.INIT);
         matchRepository.getListMatch(SessionField.getInstance().getFiledLiveData().getValue().getId(),new CallBack<List<Match>, String>() {
             @Override
             public void onSuccess(List<Match> matchList) {
-                Log.d("match", "ListMatc 1");
+                teamLoadState.setValue(LoadingState.LOADED);
                 if(matchList == null){
-                    Log.d("match", "ListMatc 2");
+                    statusData.setValue(Status.NO_DATA);
                     listBookingFieldLiveData.setValue(new ArrayList<Match>());
                     adapterListMatchVertical.setListMatch(new ArrayList<Match>());
                     adapterListMatchVertical.notifyDataSetChanged();
                 }else{
-                    Log.d("match", "ListMatc 3");
+                    statusData.setValue(Status.EXIST_DATA);
                     listBookingFieldLiveData.setValue(matchList);
                     adapterListMatchVertical.setListMatch(matchList);
                     adapterListMatchVertical.notifyDataSetChanged();
@@ -61,9 +65,12 @@ public class ListMatchViewModel extends ViewModel{
     }
 
     public void updateScoreMatch(Map<String,Object> map){
+        executeState.setValue(LoadingState.INIT);
         matchRepository.updateScoreMatch(map, new CallBack<String, String>() {
+
             @Override
             public void onSuccess(String s) {
+                executeState.setValue(LoadingState.LOADED);
                 resultUpdateScore.setValue(Result.SUCCESS);
             }
 
@@ -76,5 +83,29 @@ public class ListMatchViewModel extends ViewModel{
 
     public MutableLiveData<Result> getResultUpdateScore() {
         return resultUpdateScore;
+    }
+
+    public MutableLiveData<LoadingState> getTeamLoadState() {
+        return teamLoadState;
+    }
+
+    public void setTeamLoadState(MutableLiveData<LoadingState> teamLoadState) {
+        this.teamLoadState = teamLoadState;
+    }
+
+    public MutableLiveData<LoadingState> getExecuteState() {
+        return executeState;
+    }
+
+    public void setExecuteState(MutableLiveData<LoadingState> executeState) {
+        this.executeState = executeState;
+    }
+
+    public MutableLiveData<Status> getStatusData() {
+        return statusData;
+    }
+
+    public void setStatusData(MutableLiveData<Status> statusData) {
+        this.statusData = statusData;
     }
 }

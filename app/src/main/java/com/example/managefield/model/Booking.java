@@ -5,9 +5,45 @@ public class Booking {
     private Field idField;
     private Team idTeamHome;
     private Team idTeamAway;
-    private String date;
+    private long date;
     private String phone;
-    private TimeGame idTimeGame;
+    private String startTime ;
+    private String endTime;
+    private String position;
+    private String cost ;
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
     private String note;
 
 
@@ -46,11 +82,11 @@ public class Booking {
         this.idTeamAway = idTeamAway;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
@@ -60,14 +96,6 @@ public class Booking {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public TimeGame getIdTimeGame() {
-        return idTimeGame;
-    }
-
-    public void setIdTimeGame(TimeGame idTimeGame) {
-        this.idTimeGame = idTimeGame;
     }
 
     public String getNote() {

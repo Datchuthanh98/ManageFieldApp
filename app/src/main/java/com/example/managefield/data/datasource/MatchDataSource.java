@@ -113,18 +113,18 @@ public class MatchDataSource {
 
     public void declineBooking(Booking booking, final CallBack declineBooking) {
 
-//        db.collection("Booking").document(idBooking).update("approve", true).addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//                declineBooking.onSuccess("");
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                declineBooking.onSuccess(e.getMessage());
-//
-//            }
-//        });
+        db.collection("Booking").document(booking.getId()).update("approve", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                declineBooking.onSuccess("");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                declineBooking.onSuccess(e.getMessage());
+
+            }
+        });
     }
 
     public void updateScoreMatch(Map<String,Object>map , final  CallBack<String,String> callBack){

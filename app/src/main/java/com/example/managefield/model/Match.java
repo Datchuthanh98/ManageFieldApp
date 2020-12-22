@@ -1,11 +1,23 @@
 package com.example.managefield.model;
 
+import java.util.List;
+
 public class Match {
     private  String id;
     private  Booking idBooking;
     private  String scoreHome;
     private  String scoreAway;
+    private  long date;
     private  Boolean active ;
+    private List<Team> listQueueTeam;
+
+    public List<Team> getListQueueTeam() {
+        return listQueueTeam;
+    }
+
+    public void setListQueueTeam(List<Team> listQueueTeam) {
+        this.listQueueTeam = listQueueTeam;
+    }
 
     public Match() {
     }
@@ -48,5 +60,13 @@ public class Match {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 }

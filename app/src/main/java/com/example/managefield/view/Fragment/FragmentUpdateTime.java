@@ -60,13 +60,21 @@ public class FragmentUpdateTime extends BottomSheetDialogFragment {
 
 
     private  void initComponent(final Context context){
-         binding.btnSave.setOnClickListener(new View.OnClickListener() {
+         binding.btnUpdate.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  viewModel.updateTime(getScoreData());
                  detack();
              }
          });
+
+        binding.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.deleteTimeGame(getScoreData());
+                detack();
+            }
+        });
     }
 
     private void detack(){
@@ -81,7 +89,6 @@ public class FragmentUpdateTime extends BottomSheetDialogFragment {
         data.put("endTime", binding.txtEndTime.getText().toString());
         data.put("cost", binding.txtCost.getText().toString());
         data.put("position", binding.txtPosition.getText().toString());
-        data.put("idField", timeGame.getIdField());
         data.put("id",timeGame.getId());
         return data;
     }

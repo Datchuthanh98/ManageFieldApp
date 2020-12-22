@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.managefield.Interface.CallBack;
+import com.example.managefield.model.Field;
 import com.example.managefield.model.TimeGame;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -89,8 +90,8 @@ public class TimeDataSource {
         });
     }
 
-    public void updateTime(Map<String,Object> map,final CallBack<String, String> updateTime) {
-       db.collection("TimeGame").document((String) map.get("id")).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+    public void updateTime(String idField,Map<String,Object> map,final CallBack<String, String> updateTime) {
+       db.collection("Field").document(idField).collection("listTimeGame").document((String) map.get("id")).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
            @Override
            public void onSuccess(Void aVoid) {
               updateTime.onSuccess("");
@@ -101,5 +102,19 @@ public class TimeDataSource {
            updateTime.onFailure("");
            }
        });
+    }
+
+    public void deleteTime(String idField,Map<String,Object> map,final CallBack<String, String> updateTime) {
+        db.collection("Field").document(idField).collection("listTimeGame").document((String) map.get("id")).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                updateTime.onSuccess("");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                updateTime.onFailure("");
+            }
+        });
     }
 }

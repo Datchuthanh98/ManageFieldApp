@@ -39,7 +39,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         fieldRepository.updateProfile(updateProfileMap, new CallBack<String, String>() {
             @Override
             public void onSuccess(String sucess) {
-                Toast.makeText(getApplicationContext(), "Updated token", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -80,7 +79,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationBuilder.setAutoCancel(true)
                     .setDefaults(Notification.DEFAULT_ALL)
                     .setWhen(System.currentTimeMillis())
-                    .setSmallIcon(R.drawable.ic_clear_black_24dp)
+                    .setSmallIcon(R.drawable.ic_baseline_sports_soccer_24)
                     .setContentTitle(messageType)
                     .setContentText(contentText)
                     .setContentInfo("Info");

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.managefield.R;
 import com.example.managefield.databinding.ItemBookingVerticalBinding;
 import com.example.managefield.model.Booking;
 import com.example.managefield.viewModel.ListBookingViewModel;
@@ -20,9 +21,9 @@ import com.squareup.picasso.Picasso;
 //import com.example.managefield.view.Fragment.FragmentMainProfileMatch;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-import static com.example.managefield.R.drawable.avatar_team_default;
 
 
 public class RecycleViewAdapterListBookingVertical extends RecyclerView.Adapter<RecycleViewAdapterListBookingVertical.MyViewHolder> {
@@ -68,14 +69,6 @@ public class RecycleViewAdapterListBookingVertical extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                ActivityMainField activityHome = (ActivityMainField) holder.itemView.getContext();
-//                activityHome.addFragment(new FragmentMainProfileMatch());
-            }
-        });
-
         holder.binding.btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +103,7 @@ public class RecycleViewAdapterListBookingVertical extends RecyclerView.Adapter<
         }
 
         if(bookingList.get(position).getIdTeamAway() !=null) {
-            holder.binding.avatarAway.setImageResource(avatar_team_default);
+            holder.binding.avatarAway.setImageResource(R.drawable.avatar_team_default);
             storageRef.child(bookingList.get(position).getIdTeamAway().getUrlAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
@@ -127,8 +120,18 @@ public class RecycleViewAdapterListBookingVertical extends RecyclerView.Adapter<
             });
         }
 
-
         holder.binding.setBooking(bookingList.get(position));
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(bookingList.get(position).getDate());
+        int pYear=calendar.get(Calendar.YEAR);
+        int pMonth=calendar.get(Calendar.MONTH);
+        int pDay=calendar.get(Calendar.DAY_OF_MONTH);
+         String startTime = bookingList.get(position).getStartTime();
+        String endTime = bookingList.get(position).getEndTime();
+        holder.binding.txtTime.setText(pDay+"/"+(pMonth+1)+"/"+pYear+","+startTime+"-"+endTime);
+        holder.binding.txtField.setText("Sân thứ " + bookingList.get(position).getPosition());
+
     }
 
     @Override

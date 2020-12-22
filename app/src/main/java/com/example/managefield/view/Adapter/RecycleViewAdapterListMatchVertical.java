@@ -29,10 +29,10 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-import static com.example.managefield.R.drawable.avatar_team;
-import static com.example.managefield.R.drawable.avatar_team_default;
+
 
 //import com.example.managefield.view.Fragment.FragmentMainProfileMatch;
 
@@ -110,7 +110,7 @@ public class RecycleViewAdapterListMatchVertical extends RecyclerView.Adapter<Re
 
 
         if(matches.get(position).getIdBooking().getIdTeamAway() != null) {
-            holder.binding.avatarAway.setImageResource(avatar_team_default);
+            holder.binding.avatarAway.setImageResource(R.drawable.avatar_team_default);
             storageRef.child(matches.get(position).getIdBooking().getIdTeamAway().getUrlAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
@@ -127,11 +127,65 @@ public class RecycleViewAdapterListMatchVertical extends RecyclerView.Adapter<Re
         }
         
         holder.binding.setMatch(matches.get(position));
+
+
+
+
+        Calendar calendar = Calendar.getInstance();
+
+
+        calendar.setTimeInMillis(matches.get(position).getIdBooking().getDate());
+        int pYear=calendar.get(Calendar.YEAR);
+        int pMonth=calendar.get(Calendar.MONTH);
+        int pDay=calendar.get(Calendar.DAY_OF_MONTH);
+        String startTime = matches.get(position).getIdBooking().getStartTime();
+        String endTime = matches.get(position).getIdBooking().getEndTime();
+        holder.binding.txtTime.setText(pDay+"/"+(pMonth+1)+"/"+pYear+","+startTime+"-"+endTime);
+        holder.binding.txtField.setText("Sân thứ " + matches.get(position).getIdBooking().getPosition());
+
+        String cutEndTime[] = matches.get(position).getIdBooking().getEndTime().split(":",2);
+        int pHourEnd=Integer.parseInt(cutEndTime[0]);
+        int mMinuteEnd= Integer.parseInt(cutEndTime[1]);
+
+        String cutStartTime[] = matches.get(position).getIdBooking().getStartTime().split(":",2);
+        int pHourStart=Integer.parseInt(cutStartTime[0]);
+        int mMinuteStart= Integer.parseInt(cutStartTime[1]);
+
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.set(pYear,pMonth,pDay,pHourEnd,mMinuteEnd);
+        long timeGameEnd = calendar2.getTimeInMillis();
+
+        Calendar calendar3 = Calendar.getInstance();
+        calendar3.set(pYear,pMonth,pDay,pHourStart,mMinuteStart);
+        long timeGameStart = calendar3.getTimeInMillis();
+
+        Calendar calendar4 = Calendar.getInstance();
+        long timeNow = calendar4.getTimeInMillis();
+
+
+        if(timeNow < timeGameStart){
+            holder.binding.btnUpdate.setVisibility(View.GONE);
+            holder.binding.status.setText("Sắp diễn ra");
+        }else if(timeGameStart <= timeNow && timeNow  <= timeGameEnd){
+            holder.binding.btnUpdate.setVisibility(View.GONE);
+            holder.binding.status.setText("Đang diễn ra ");
+        }else {
+            holder.binding.btnUpdate.setVisibility(View.VISIBLE);
+            holder.binding.status.setText("Đã kết thúc ");
+        }
+
+
+
+
+
+
     }
 
     @Override
     public int getItemCount() {
         return matches.size();
     }
+
+
 }
 

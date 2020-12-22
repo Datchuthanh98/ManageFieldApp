@@ -45,13 +45,15 @@ public class FragmentUpdateScore extends BottomSheetDialogFragment {
 
 
     private  void initComponent(final Context context){
-         binding.btnSave.setOnClickListener(new View.OnClickListener() {
+         binding.btnUpdate.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  viewModel.setScoreList(getScoreData());
                  detack();
              }
          });
+
+
     }
 
     private void detack(){

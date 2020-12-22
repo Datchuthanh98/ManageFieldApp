@@ -63,7 +63,7 @@ public class ListTimeViewModel extends ViewModel{
     }
 
     public void updateTime(Map<String , Object> map){
-        timeGameRepository.updateTime(map, new CallBack<String, String>() {
+        timeGameRepository.updateTime(idTeam,map, new CallBack<String, String>() {
             @Override
             public void onSuccess(String s) {
                 getListTime();
@@ -75,6 +75,21 @@ public class ListTimeViewModel extends ViewModel{
             }
         });
     }
+
+    public void deleteTimeGame(Map<String , Object> map){
+        timeGameRepository.deleteTimeGame(idTeam,map, new CallBack<String, String>() {
+            @Override
+            public void onSuccess(String s) {
+                getListTime();
+            }
+
+            @Override
+            public void onFailure(String s) {
+
+            }
+        });
+    }
+
 
 
     public RecycleViewAdapterListTimeVertical getAdapterListTime() {

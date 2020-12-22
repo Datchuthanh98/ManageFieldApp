@@ -24,13 +24,15 @@
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Update score "
+                    android:text="Cập nhật kết quả "
                     android:gravity="center_vertical"
                     android:textSize="20dp"
                     android:layout_weight="1"/>
 
+
+
                 <ImageButton
-                    android:id="@+id/btnSave"
+                    android:id="@+id/btnUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingHorizontal="15dp"
@@ -48,7 +50,7 @@
             >
             <TextView
                 android:drawableStart="@drawable/goal"
-                android:text=" Score Team Home"
+                android:text=" Số bàn đội sân nhà"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"
@@ -60,7 +62,7 @@
                 android:layout_height="wrap_content"></EditText>
             <TextView
                 android:drawableStart="@drawable/goal"
-                android:text=" Score Team Away"
+                android:text=" Số bàn đội sân khách"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="match_parent"

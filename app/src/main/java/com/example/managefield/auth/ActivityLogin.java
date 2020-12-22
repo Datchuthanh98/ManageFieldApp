@@ -3,6 +3,7 @@ package com.example.managefield.auth;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -56,6 +57,16 @@ public class ActivityLogin extends AppCompatActivity {
             public void onClick(View view) {
                 loginWithEmail();
 
+            }
+        });
+
+        binding.btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.facebook.com/Dat.Hazard.98/"));
+                startActivity(intent);
             }
         });
     }
