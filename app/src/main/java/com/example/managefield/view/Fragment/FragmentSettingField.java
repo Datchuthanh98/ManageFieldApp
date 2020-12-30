@@ -36,8 +36,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class FragmentSettingField extends Fragment {
-    private Dialog loadingDialog;
-    private LoadingLayoutBinding loadingLayoutBinding;
+
     private FragmentSettingFieldBinding binding;
     public static final int RESULT_LOAD_IMG_AVATAR = 1012;
     public static final int RESULT_LOAD_IMG_COVER = 1013;
@@ -56,7 +55,7 @@ public class FragmentSettingField extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
          initComponent(view.getContext());
-        initLoadingDialog(view.getContext());
+
     }
 
     private  void initComponent(final Context context){
@@ -125,13 +124,7 @@ public class FragmentSettingField extends Fragment {
         getParentFragmentManager().popBackStack();
     }
 
-    private void initLoadingDialog(Context context) {
-        loadingDialog = new Dialog(context);
-        loadingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        loadingLayoutBinding = LoadingLayoutBinding.inflate(getLayoutInflater());
-        loadingDialog.setContentView(loadingLayoutBinding.getRoot());
-        loadingDialog.setCancelable(false);
-    }
+
 
 
 
@@ -169,7 +162,6 @@ public class FragmentSettingField extends Fragment {
     }
 
     private void updateImage(Uri uri, String path , boolean isAvatar) {
-        loadingDialog.show();
         session.updateImage(uri, path,isAvatar);
     }
 
