@@ -22,22 +22,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right">
+                >
                 <TextView
+                    android:textAlignment="center"
                     android:id="@+id/title"
                     android:layout_weight="1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:text="Danh sách trận đấu"
-                    android:textSize="20dp"
-                    android:textColor="@color/white"/>
+                    android:textSize="24dp"
+                    android:textColor="@color/white"
+                    tools:ignore="RtlCompat" />
 
             </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
         <LinearLayout
-
+            android:background="@drawable/toolbar_color"
             android:padding="10dp"
             android:id="@+id/selectDate"
             android:layout_width="match_parent"
@@ -45,7 +47,6 @@
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             android:orientation="vertical">
             <LinearLayout
-
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -53,7 +54,6 @@
                 <TextView
                     android:background="@drawable/border_text"
                     android:text="12/12/2020"
-
                     android:id="@+id/dateStart"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
@@ -98,23 +98,25 @@
             app:layout_constraintTop_toBottomOf="@id/selectDate"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/recycleViewListVertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/loading_layoutt"
             android:layout_width="0dp"
+            android:layout_height="0dp"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/loading_layout"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/selectDate">
 
             <ProgressBar
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -123,15 +125,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="gone"
             android:id="@+id/viewNoData"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintTop_toBottomOf="@+id/selectDate">
 
             <TextView
                 android:layout_width="wrap_content"

@@ -1,11 +1,13 @@
 package com.example.managefield.view.Fragment;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,6 +28,8 @@ import com.example.managefield.viewModel.ListMatchViewModel;
 import com.example.managefield.Session.SessionStateData;
 import com.example.managefield.viewModel.UpdateScoreViewModel;
 
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Map;
 
 public class FragmentListMatch extends Fragment {
@@ -34,6 +38,8 @@ public class FragmentListMatch extends Fragment {
     private FragmentListMatchBinding binding;
     private Dialog loadingDialog;
     private LoadingLayoutBinding loadingLayoutBinding;
+    private long timeStartLong;
+    private long timeEndLong;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,7 +63,9 @@ public class FragmentListMatch extends Fragment {
         adapter.setFm(getParentFragmentManager());
         binding.recycleViewListVertical.setAdapter(viewModel.getAdapterListMatch());
         binding.recycleViewListVertical.setLayoutManager(new LinearLayoutManager(getContext()));
+        setDafaultDate();
         observerLiveData();
+        initComponent();
     }
 
 
@@ -66,7 +74,7 @@ public class FragmentListMatch extends Fragment {
         SessionStateData.getInstance().getDatalistMatch().observe(getViewLifecycleOwner(), new Observer<DataState>() {
             @Override
             public void onChanged(DataState dataState) {
-                viewModel.getListMatch();
+                viewModel.getListMatch(timeStartLong ,timeEndLong);
             }
         });
 
@@ -85,7 +93,7 @@ public class FragmentListMatch extends Fragment {
             public void onChanged(Result result) {
                 if(result == Result.SUCCESS){
                     Toast.makeText(getContext(),"Cập nhập thành công",Toast.LENGTH_SHORT).show();
-                    viewModel.getListMatch();
+                    viewModel.getListMatch(timeStartLong,timeEndLong);
                 }
             }
         });
@@ -113,6 +121,111 @@ public class FragmentListMatch extends Fragment {
                 }
             }
         });
+    }
+
+
+     private void initComponent(){
+         binding.dateStart.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Calendar c = Calendar.getInstance();
+                 Dialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                     @Override
+                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                         String sday, smonth;
+                         if(day<10){
+                             sday ="0"+day;
+                         }else{
+                             sday=""+day;
+                         }
+
+                         if(month<9){
+                             smonth ="0"+(month+1);
+                         }else{
+                             smonth=""+(month+1);
+                         }
+
+                         String dateString = sday + "/" + smonth + "/" + year;
+
+                         binding.dateStart.setText(dateString);
+
+                         Calendar calendar = Calendar.getInstance();
+                         calendar.set(year, month, day,0,0,0);
+                         timeStartLong = calendar.getTimeInMillis();
+                         timeStartLong = timeStartLong/1000;
+                         timeStartLong = timeStartLong * 1000;
+
+
+
+                     }
+                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                 datePickerDialog.show();
+             }
+         });
+
+
+         binding.dateEnd.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Calendar c = Calendar.getInstance();
+                 Dialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                     @Override
+                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                         String sday, smonth;
+                         if(day<10){
+                             sday ="0"+day;
+                         }else{
+                             sday=""+day;
+                         }
+
+                         if(month<9){
+                             smonth ="0"+(month+1);
+                         }else{
+                             smonth=""+(month+1);
+                         }
+
+                         String dateString = sday + "/" + smonth + "/" + year;
+
+                         binding.dateEnd.setText(dateString);
+
+                         Calendar calendar = Calendar.getInstance();
+                         calendar.set(year, month, day,0,0,0);
+                         timeEndLong = calendar.getTimeInMillis();
+                         timeEndLong = timeEndLong/1000;
+                         timeEndLong = timeEndLong * 1000;
+
+                     }
+                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                 datePickerDialog.show();
+             }
+         });
+
+         binding.searchDate.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Toast.makeText(getContext(),"Search Date ",Toast.LENGTH_SHORT).show();
+                 Map<String ,Object> map = new HashMap<>();
+
+                 viewModel.getListMatchByDate(timeStartLong,timeEndLong);
+             }
+         });
+     }
+
+
+
+    private void setDafaultDate(){
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int month = Calendar.getInstance().get(Calendar.MONTH);
+        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        String dateString = day + "/" + (month+1) + "/" + year;
+        binding.dateStart.setText(dateString);
+        binding.dateEnd.setText(dateString);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day,0,0,0);
+        timeStartLong = calendar.getTimeInMillis();
+        timeStartLong = timeStartLong/1000;
+        timeStartLong = timeStartLong * 1000;
+        timeEndLong = timeStartLong;
     }
 
 

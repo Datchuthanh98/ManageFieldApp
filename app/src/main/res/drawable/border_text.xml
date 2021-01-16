@@ -5,6 +5,11 @@
         android:width="2dp"
         android:color="#004d4d" />
 
+    <gradient
+        android:angle="225"
+        android:startColor="#ffffff"
+        android:endColor="#ffffff"/>
+
     <corners
         android:bottomLeftRadius="5dp"
         android:bottomRightRadius="5dp"

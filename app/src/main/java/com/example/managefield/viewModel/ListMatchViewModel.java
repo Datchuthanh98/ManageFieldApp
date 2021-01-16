@@ -24,17 +24,17 @@ import java.util.Map;
 public class ListMatchViewModel extends ViewModel{
     private MatchRepository matchRepository = MatchRepository.getInstance();
     private RecycleViewAdapterListMatchVertical adapterListMatchVertical = new RecycleViewAdapterListMatchVertical();
-    private MutableLiveData<List<Match>> listBookingFieldLiveData = new MutableLiveData<>();
+    private List<Match> listMatch = new ArrayList<>();
     private MutableLiveData<Result> resultUpdateScore = new MutableLiveData<>();
     private MutableLiveData<LoadingState> teamLoadState = new MutableLiveData<>(LoadingState.INIT);
     private MutableLiveData<LoadingState> executeState = new MutableLiveData<>();
     private MutableLiveData<Status> statusData = new MutableLiveData<>(Status.NO_DATA);
 
     public ListMatchViewModel(){
-        getListMatch();
+
     }
 
-    public void  getListMatch(){
+    public void  getListMatch(final long startTime, final long endTime){
         teamLoadState.setValue(LoadingState.INIT);
         matchRepository.getListMatch(SessionField.getInstance().getFiledLiveData().getValue().getId(),new CallBack<List<Match>, String>() {
             @Override
@@ -42,14 +42,14 @@ public class ListMatchViewModel extends ViewModel{
                 teamLoadState.setValue(LoadingState.LOADED);
                 if(matchList == null){
                     statusData.setValue(Status.NO_DATA);
-                    listBookingFieldLiveData.setValue(new ArrayList<Match>());
+                    listMatch = new ArrayList<Match>();
                     adapterListMatchVertical.setListMatch(new ArrayList<Match>());
                     adapterListMatchVertical.notifyDataSetChanged();
                 }else{
                     statusData.setValue(Status.EXIST_DATA);
-                    listBookingFieldLiveData.setValue(matchList);
-                    adapterListMatchVertical.setListMatch(matchList);
-                    adapterListMatchVertical.notifyDataSetChanged();
+                    listMatch= matchList;
+                    getListMatchByDate(startTime,endTime);
+
                 }
             }
             @Override
@@ -107,5 +107,24 @@ public class ListMatchViewModel extends ViewModel{
 
     public void setStatusData(MutableLiveData<Status> statusData) {
         this.statusData = statusData;
+    }
+
+    public void getListMatchByDate(long startTime, long endTime) {
+        List<Match> listSearch = new ArrayList<>();
+        for(int i = 0 ;i < listMatch.size(); i++) {
+            Log.d("checksearch",startTime+" "+endTime+" "+listMatch.get(i).getDate());
+            if(listMatch.get(i).getDate() >= startTime && listMatch.get(i).getDate() <= endTime){
+                listSearch.add(listMatch.get(i));
+                Log.d("checksearch","size"+ listMatch.size());
+            }
+        }
+
+        if(listSearch.size() == 0){
+            statusData.setValue(Status.NO_DATA);
+        }else {
+            statusData.setValue(Status.EXIST_DATA);
+        }
+        adapterListMatchVertical.setListMatch(listSearch);
+        adapterListMatchVertical.notifyDataSetChanged();
     }
 }

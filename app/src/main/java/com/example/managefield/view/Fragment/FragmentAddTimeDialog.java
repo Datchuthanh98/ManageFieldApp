@@ -65,7 +65,7 @@ public class FragmentAddTimeDialog extends DialogFragment {
     private Map<String, Object> dataTeam() {
         data.put("startTime", binding.txtStartTime.getText().toString());
         data.put("endTime", binding.txtEndTime.getText().toString());
-        data.put("position", binding.txtEndTime.getText().toString());
+        data.put("position", binding.txtPosition.getText().toString());
         data.put("cost", binding.txtCost.getText().toString());
         return data;
     }

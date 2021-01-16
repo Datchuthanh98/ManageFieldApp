@@ -39,9 +39,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
-            <TextView
-                style="@style/viewParent.headerText.settingsMiniTitle"
-                android:text="Thông tin cá nhân" />
 
             <TextView
                 android:id="@+id/btnEditAvatar"
